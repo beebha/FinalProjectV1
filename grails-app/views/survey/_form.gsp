@@ -7,7 +7,7 @@
 		<g:message code="survey.name.label" default="Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="name" required="required" value="${surveyInstance?.name}" />
+	<g:textField name="name" required="" value="${surveyInstance?.name}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'category', 'error')} required">
@@ -15,7 +15,7 @@
 		<g:message code="survey.category.label" default="Category" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="category" from="${surveyInstance.constraints.category.inList}" value="${surveyInstance?.category}" valueMessagePrefix="survey.category"  />
+	<g:select name="category" from="${surveyInstance.constraints.category.inList}" required="" value="${surveyInstance?.category}" valueMessagePrefix="survey.category"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: surveyInstance, field: 'questions', 'error')} ">
@@ -24,12 +24,14 @@
 		
 	</label>
 	
-<ul>
+<ul class="one-to-many">
 <g:each in="${surveyInstance?.questions?}" var="q">
     <li><g:link controller="question" action="show" id="${q.id}">${q?.encodeAsHTML()}</g:link></li>
 </g:each>
-</ul>
+<li class="add">
 <g:link controller="question" action="create" params="['survey.id': surveyInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'question.label', default: 'Question')])}</g:link>
+</li>
+</ul>
 
 </div>
 
@@ -39,12 +41,14 @@
 		
 	</label>
 	
-<ul>
+<ul class="one-to-many">
 <g:each in="${surveyInstance?.surveyResults?}" var="s">
     <li><g:link controller="surveyResult" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
 </g:each>
-</ul>
+<li class="add">
 <g:link controller="surveyResult" action="create" params="['survey.id': surveyInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'surveyResult.label', default: 'SurveyResult')])}</g:link>
+</li>
+</ul>
 
 </div>
 
@@ -53,6 +57,6 @@
 		<g:message code="survey.user.label" default="User" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="user.id" from="${edu.harvard.cscie56.finalproject.auth.User.list()}" optionKey="id" value="${surveyInstance?.user?.id}"  />
+	<g:select id="user" name="user.id" from="${edu.harvard.cscie56.finalproject.auth.User.list()}" optionKey="id" required="" value="${surveyInstance?.user?.id}" class="many-to-one"/>
 </div>
 

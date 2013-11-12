@@ -1,39 +1,50 @@
 
 <%@ page import="edu.harvard.cscie56.finalproject.Answer" %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="mobile">
-        <g:set var="entityName" value="${message(code: 'answer.label', default: 'Answer')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
-    </head>
+	<head>
+		<meta name="layout" content="main">
+		<g:set var="entityName" value="${message(code: 'answer.label', default: 'Answer')}" />
+		<title><g:message code="default.list.label" args="[entityName]" /></title>
+	</head>
 	<body>
-		<div data-role="header" data-position="fixed">
+		<a href="#list-answer" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<div class="nav" role="navigation">
+			<ul>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+			</ul>
+		</div>
+		<div id="list-answer" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-			<div data-role="navbar">
-				<ul>
-					<li><a data-icon="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-					<li><g:link data-icon="plus" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-				</ul>
+			<g:if test="${flash.message}">
+			<div class="message" role="status">${flash.message}</div>
+			</g:if>
+			<table>
+				<thead>
+					<tr>
+					
+						<th><g:message code="answer.optionSelected.label" default="Option Selected" /></th>
+					
+						<th><g:message code="answer.surveyResult.label" default="Survey Result" /></th>
+					
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${answerInstanceList}" status="i" var="answerInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					
+						<td><g:link action="show" id="${answerInstance.id}">${fieldValue(bean: answerInstance, field: "optionSelected")}</g:link></td>
+					
+						<td>${fieldValue(bean: answerInstance, field: "surveyResult")}</td>
+					
+					</tr>
+				</g:each>
+				</tbody>
+			</table>
+			<div class="pagination">
+				<g:paginate total="${answerInstanceTotal}" />
 			</div>
 		</div>
-		<div data-role="content">
-			<g:if test="${flash.message}">
-			<div class="message">${flash.message}</div>
-			</g:if>
-			<ul data-role="listview" data-split-icon="gear" data-filter="true">
-				<g:each in="${answerInstanceList}" status="i" var="answerInstance">
-					<li>
-						<g:link action="show" id="${answerInstance.id}">${answerInstance}</g:link>
-						<g:link action="edit" id="${answerInstance.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					</li>
-				</g:each>
-			</ol>
-			<fieldset class="pagination">
-				<g:paginate total="${answerInstanceTotal}" />
-			</fieldset>
-		</div>
-		<div data-role="footer">
-		</div>
-    </body>
+	</body>
 </html>

@@ -1,50 +1,54 @@
 
 <%@ page import="edu.harvard.cscie56.finalproject.Answer" %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="mobile">
-        <g:set var="entityName" value="${message(code: 'answer.label', default: 'Answer')}" />
-        <title><g:message code="default.show.label" args="[entityName]" /></title>
-    </head>
-    <body>
-		<div data-role="header" data-position="fixed">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<div data-role="navbar">
-				<ul>
-					<li><a data-icon="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-					<li><g:link data-icon="grid" data-ajax="false" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				</ul>
-			</div>
+	<head>
+		<meta name="layout" content="main">
+		<g:set var="entityName" value="${message(code: 'answer.label', default: 'Answer')}" />
+		<title><g:message code="default.show.label" args="[entityName]" /></title>
+	</head>
+	<body>
+		<a href="#show-answer" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<div class="nav" role="navigation">
+			<ul>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+			</ul>
 		</div>
-		<div data-role="content">
+		<div id="show-answer" class="content scaffold-show" role="main">
+			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
-			<div class="message">${flash.message}</div>
+			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<dl>
+			<ol class="property-list answer">
 			
-				<dt><g:message code="answer.id.label" default="Id" /></dt>
-				
-					<dd><g:fieldValue bean="${answerInstance}" field="id"/></dd>
-				
+				<g:if test="${answerInstance?.optionSelected}">
+				<li class="fieldcontain">
+					<span id="optionSelected-label" class="property-label"><g:message code="answer.optionSelected.label" default="Option Selected" /></span>
+					
+						<span class="property-value" aria-labelledby="optionSelected-label"><g:link controller="option" action="show" id="${answerInstance?.optionSelected?.id}">${answerInstance?.optionSelected?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
 			
-				<dt><g:message code="answer.optionSelected.label" default="Option Selected" /></dt>
-				
-					<dd><g:link controller="option" action="show" id="${answerInstance?.optionSelected?.id}">${answerInstance?.optionSelected?.encodeAsHTML()}</g:link></dd>
-				
+				<g:if test="${answerInstance?.surveyResult}">
+				<li class="fieldcontain">
+					<span id="surveyResult-label" class="property-label"><g:message code="answer.surveyResult.label" default="Survey Result" /></span>
+					
+						<span class="property-value" aria-labelledby="surveyResult-label"><g:link controller="surveyResult" action="show" id="${answerInstance?.surveyResult?.id}">${answerInstance?.surveyResult?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
 			
-				<dt><g:message code="answer.surveyResult.label" default="Survey Result" /></dt>
-				
-					<dd><g:link controller="surveyResult" action="show" id="${answerInstance?.surveyResult?.id}">${answerInstance?.surveyResult?.encodeAsHTML()}</g:link></dd>
-				
-			
-			</dl>
+			</ol>
 			<g:form>
-				<g:hiddenField name="id" value="${answerInstance?.id}" />
-				<g:actionSubmit data-icon="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" />
+				<fieldset class="buttons">
+					<g:hiddenField name="id" value="${answerInstance?.id}" />
+					<g:link class="edit" action="edit" id="${answerInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+				</fieldset>
 			</g:form>
 		</div>
-		<div data-role="footer">
-		</div>
-    </body>
+	</body>
 </html>
