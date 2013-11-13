@@ -13,7 +13,7 @@
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<div data-role="navbar">
 				<ul>
-					<li><a data-icon="home" href="\${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+					<li><a data-icon="home" href="\${createLink(uri: '/admin')}"><g:message code="default.home.label"/></a></li>
 					<li><g:link data-icon="grid" data-ajax="false" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				</ul>
 			</div>

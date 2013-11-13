@@ -96,11 +96,12 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'edu.harvard.cscie
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'edu.harvard.cscie56.finalproject.auth.UserRole'
 grails.plugin.springsecurity.authority.className = 'edu.harvard.cscie56.finalproject.auth.Role'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                              ['ROLE_ADMIN'],
-	'/index':                         ['ROLE_ADMIN'],
-	'/index.gsp':                     ['ROLE_ADMIN'],
-    '/login':                         ['permitAll'],
-    '/login.gsp':                     ['permitAll'],
+	'/':                              ['permitAll'],
+    '/customLogin':                   ['permitAll'],
+	'/login.gsp':                     ['permitAll'],
+    '/admin':                         ['ROLE_ADMIN'],
+    '/index':                         ['ROLE_ADMIN'],
+    '/index.gsp':                     ['ROLE_ADMIN'],
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
