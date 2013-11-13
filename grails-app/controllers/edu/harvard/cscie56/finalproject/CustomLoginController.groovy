@@ -7,6 +7,6 @@ class CustomLoginController {
         println "username: "+ j_username
         println "password: "+ j_password
 
-        request.getRequestDispatcher("/j_spring_security_check").forward (request, response);
+        request.getRequestDispatcher("/j_spring_security_check").forward(request, response);
     }
 }
