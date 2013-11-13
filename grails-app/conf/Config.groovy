@@ -109,4 +109,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/loginFailure'
+grails.plugin.springsecurity.successHandler.ajaxSuccessUrl = '/answer'
 

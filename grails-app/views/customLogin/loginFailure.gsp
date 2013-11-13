@@ -5,12 +5,14 @@
 </head>
 <body>
 <script>
+
     function clearButtonClicked()
     {
         console.log("clearButtonClicked");
         $('#username').val('');
         $('#password').val('');
     }
+
 </script>
 <!-- Home -->
 <div data-role="page" id="loginPage">
@@ -23,6 +25,7 @@
         <h2>
             Surveys Galore
         </h2>
+        <center><div id="errorMsg">Invalid username and/or password.</div></center>
         <g:render template='../customLogin/loginContent'/>
     </div>
 </div>
