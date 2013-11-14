@@ -10,15 +10,13 @@
     <div data-role="page" id="loginPage">
         <div data-theme="a" data-role="header">
             <h3>
-                CSCI-56 Final Project
+                CSCI-56 Final Project - Surveys Galore
             </h3>
         </div>
         <div data-role="content">
-            <h2>
-                Surveys Galore
-            </h2>
+            <h2>LOGIN</h2>
             <g:if test="${flash.message}">
-                <center><div class="errorMsg">${flash.message}</div></center>
+                <div class="errorMsg">${flash.message}</div>
             </g:if>
             <g:form controller="login" action="authenticate">
                 <div data-role="fieldcontain">

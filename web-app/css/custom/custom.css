@@ -1,5 +1,14 @@
+h2 {
+    color: darkslategray;
+    font-family: verdana;
+    font-style: italic;
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
 .errorMsg {
-    font-size: 150%;
+    font-size: 110%;
     color: red;
     font-weight: bold;
+    text-align: center;
 }

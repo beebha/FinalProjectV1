@@ -8,13 +8,11 @@
     <div data-role="page" id="registerPage">
         <div data-theme="a" data-role="header">
             <h3>
-                CSCI-56 Final Project
+                CSCI-56 Final Project - Surveys Galore
             </h3>
         </div>
         <div data-role="content">
-            <h2>
-                User Registration
-            </h2>
+            <h2>REGISTRATION</h2>
             <g:hasErrors bean="${registerInstance}">
                 <ul class="errorMsg" role="alert">
                     <g:eachError bean="${registerInstance}" var="error">

@@ -15,7 +15,7 @@ class LoginController {
 
         println "in loginfail"
 
-        flash.message = "Invalid username and/or password."
+        flash.message = "Sorry, we were not able to find a user with that username and password."
         render(view: "login")
     }
 }
