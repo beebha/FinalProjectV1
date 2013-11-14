@@ -13,7 +13,7 @@ class RegisterController {
     def index() {
 
         println "index"
-
+        flash.message = ""
         render(view: "register")
     }
 
@@ -25,12 +25,12 @@ class RegisterController {
 
         def userInstance = new User(
                 username: params.username,
-                password: springSecurityService.encodePassword(params.password),
+                password: springSecurityService.encodePassword(params.password, params.username),
                 enabled: true)
 
         if (params.username?.trim() == "" || params.password?.trim() == "") {
-            println "user has validation errors"
-            flash.message = "Username and/or password cannot be blank."
+            println "register has validation errors"
+            flash.message = "Email and/or password cannot be blank."
             render(view: "register", model: [registerInstance: userInstance])
             return
         }
@@ -51,9 +51,9 @@ class RegisterController {
 
         springSecurityService.reauthenticate(params.username)
 
-        println "user authenticated"
+        println "user reauthenticated"
 
-        redirect(controller: "answer",  action: "list")
+        redirect(controller: "home")
     }
 
 }

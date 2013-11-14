@@ -7,7 +7,7 @@ class LoginController {
     def authenticate() {
 
         println "in authenticate"
-
+        flash.message = ""
         request.getRequestDispatcher("/j_spring_security_check").forward(request, response)
     }
 
@@ -15,7 +15,7 @@ class LoginController {
 
         println "in loginfail"
 
-        flash.message = "Sorry, we were not able to find a user with that username and password."
+        flash.message = "Sorry, we were not able to find a user with that email and password."
         render(view: "login")
     }
 }

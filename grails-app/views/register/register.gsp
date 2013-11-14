@@ -14,7 +14,7 @@
         <div data-role="content">
             <h2>REGISTRATION</h2>
             <g:if test="${flash.message}">
-                <div class="errorMsg">${flash.message}</div>
+                <div id="errorMsg" class="errorMsg">${flash.message}</div>
             </g:if>
             <g:hasErrors bean="${registerInstance}">
                 <ul class="errorMsg" role="alert">
@@ -25,20 +25,20 @@
             </g:hasErrors>
             <g:form controller="register" action="save">
                 <div data-role="fieldcontain">
-                    <label for="username">
+                    <label for="r_username">
                         Email
                     </label>
-                    <input name="username" id="username" placeholder="" value="${registerInstance?.username}" type="email">
+                    <input name="username" id="r_username" placeholder="" value="${registerInstance?.username}" type="email">
                 </div>
                 <div data-role="fieldcontain">
-                    <label for="password">
+                    <label for="r_password">
                         Password
                     </label>
-                    <input name="password" id="password" placeholder="" value="" type="password">
+                    <input name="password" id="r_password" placeholder="" value="" type="password">
                 </div>
                 <center>
                     <input type="submit" data-inline="true" value="Register">
-                    <input type="button" data-inline="true" value="Clear" onclick="clearButtonClicked();">
+                    <input type="button" data-inline="true" value="Clear" onclick="clearButtonClicked('r_username','r_password');">
                 </center>
             </g:form>
         </div>

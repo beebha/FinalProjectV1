@@ -4,9 +4,7 @@
     <g:render template='../includes/header'/>
 </head>
 <body>
-
     <g:javascript src="application.js" />
-
     <div data-role="page" id="loginPage">
         <div data-theme="a" data-role="header">
             <h3>
@@ -23,7 +21,7 @@
                     <label for="username">
                         Email
                     </label>
-                    <input name="j_username" id="username" placeholder="" value="" type="email">
+                    <input name="j_username" id="username" placeholder="" value="${loginInstance?.username}" type="email">
                 </div>
                 <div data-role="fieldcontain">
                     <label for="password">
@@ -33,7 +31,7 @@
                 </div>
                 <center>
                     <input type="submit" data-inline="true" value="Submit">
-                    <input type="button" data-inline="true" value="Clear" onclick="clearButtonClicked();">
+                    <input type="button" data-inline="true" value="Clear" onclick="clearButtonClicked('username','password');">
                 </center>
                 <div>
                     <g:link controller="register">

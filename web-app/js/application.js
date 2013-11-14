@@ -8,9 +8,13 @@ if (typeof jQuery !== 'undefined') {
 	})(jQuery);
 }
 
-function clearButtonClicked()
+function clearButtonClicked(usernameID, passwordID)
 {
     console.log("clearButtonClicked");
-    $('#username').val('');
-    $('#password').val('');
+    $('#'+usernameID).val('');
+    $('#'+passwordID).val('');
+}
+
+function isEmpty(objID) {
+    return $.trim($('#'+objID).val()).length
 }
