@@ -11,7 +11,10 @@ class RegisterController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-        redirect(action: "create", params: params)
+
+        println "index"
+
+        redirect(action: "register", params: params)
     }
 
     def save() {
@@ -29,7 +32,7 @@ class RegisterController {
 
         if (userInstance.hasErrors()) {
             println "save hasErrors"
-            render(view: "create", model: [registerInstance: userInstance])
+            render(view: "register", model: [registerInstance: userInstance])
             return
         }
 
@@ -47,7 +50,10 @@ class RegisterController {
     }
 
 
-    def create() {
+    def register() {
+
+        println "register"
+
         [registerInstance: new User(params)]
     }
 }

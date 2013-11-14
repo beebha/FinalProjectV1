@@ -7,8 +7,8 @@ class UrlMappings {
 			}
 		}
         "/admin"(view:"/index")
-        "/"(view:"/customLogin/login")
-        "/loginFailure"(view:"/customLogin/loginFailure")
+        "/"(view:"/login/login")
+        "/loginfail"(controller: "login", action: "loginfail")
 		"500"(view:'/error')
         name forgotPassword: "/forgotPassword"(view:"/forgotPassword/forgotPassword")
 	}

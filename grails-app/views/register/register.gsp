@@ -16,13 +16,13 @@
                 User Registration
             </h2>
             <g:hasErrors bean="${registerInstance}">
-                <ul class="errors" role="alert">
+                <ul class="errorMsg" role="alert">
                     <g:eachError bean="${registerInstance}" var="error">
                         <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
                     </g:eachError>
                 </ul>
             </g:hasErrors>
-            <g:form controller="register" action="save" >
+            <g:form controller="register" action="save">
                 <div data-role="fieldcontain">
                     <label for="username">
                         Email
