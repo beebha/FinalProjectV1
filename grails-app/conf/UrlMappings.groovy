@@ -10,6 +10,5 @@ class UrlMappings {
         "/"(view:"/login/login")
         "/loginfail"(controller: "login", action: "loginfail")
 		"500"(view:'/error')
-        name forgotPassword: "/forgotPassword"(view:"/forgotPassword/forgotPassword")
 	}
 }

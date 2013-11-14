@@ -13,6 +13,9 @@
         </div>
         <div data-role="content">
             <h2>REGISTRATION</h2>
+            <g:if test="${flash.message}">
+                <div class="errorMsg">${flash.message}</div>
+            </g:if>
             <g:hasErrors bean="${registerInstance}">
                 <ul class="errorMsg" role="alert">
                     <g:eachError bean="${registerInstance}" var="error">

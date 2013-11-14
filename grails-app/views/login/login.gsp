@@ -41,7 +41,7 @@
                     </g:link>
                 </div>
                 <div>
-                    <g:link mapping="forgotPassword">
+                    <g:link controller="forgot">
                         Forgot Password
                     </g:link>
                 </div>

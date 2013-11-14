@@ -14,7 +14,7 @@ class RegisterController {
 
         println "index"
 
-        redirect(action: "register", params: params)
+        render(view: "register")
     }
 
     def save() {
@@ -27,6 +27,13 @@ class RegisterController {
                 username: params.username,
                 password: springSecurityService.encodePassword(params.password),
                 enabled: true)
+
+        if (params.username?.trim() == "" || params.password?.trim() == "") {
+            println "user has validation errors"
+            flash.message = "Username and/or password cannot be blank."
+            render(view: "register", model: [registerInstance: userInstance])
+            return
+        }
 
         userInstance.save(flush: true)
 
@@ -49,11 +56,4 @@ class RegisterController {
         redirect(controller: "answer",  action: "list")
     }
 
-
-    def register() {
-
-        println "register"
-
-        [registerInstance: new User(params)]
-    }
 }
