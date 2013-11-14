@@ -16,13 +16,13 @@
         <input type="button" data-inline="true" value="Clear" onclick="clearButtonClicked();">
     </center>
     <div>
-        <a href="" data-transition="fade">
+        <g:link controller="register">
             Register
-        </a>
+        </g:link>
     </div>
     <div>
-        <a href="" data-transition="fade">
+        <g:link mapping="forgotPassword">
             Forgot Password
-        </a>
+        </g:link>
     </div>
 </g:formRemote>

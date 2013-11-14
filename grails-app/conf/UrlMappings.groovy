@@ -10,5 +10,6 @@ class UrlMappings {
         "/"(view:"/customLogin/login")
         "/loginFailure"(view:"/customLogin/loginFailure")
 		"500"(view:'/error')
+        name forgotPassword: "/forgotPassword"(view:"/forgotPassword/forgotPassword")
 	}
 }

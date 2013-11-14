@@ -7,3 +7,10 @@ if (typeof jQuery !== 'undefined') {
 		});
 	})(jQuery);
 }
+
+function clearButtonClicked()
+{
+    console.log("clearButtonClicked");
+    $('#username').val('');
+    $('#password').val('');
+}
