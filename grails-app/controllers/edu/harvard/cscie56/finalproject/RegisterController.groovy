@@ -25,7 +25,7 @@ class RegisterController {
 
         def userInstance = new User(
                 username: params.username,
-                password: springSecurityService.encodePassword(params.password, params.username),
+                password: params.password,
                 enabled: true)
 
         if (params.username?.trim() == "" || params.password?.trim() == "") {
