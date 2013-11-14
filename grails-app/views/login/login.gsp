@@ -21,7 +21,7 @@
                     <label for="username">
                         Email
                     </label>
-                    <input name="j_username" id="username" placeholder="" value="${loginInstance?.username}" type="email">
+                    <input name="j_username" id="username" placeholder="" value="" type="email">
                 </div>
                 <div data-role="fieldcontain">
                     <label for="password">

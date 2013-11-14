@@ -4,10 +4,13 @@ class LoginController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def authenticate() {
+    def index() {
+        flash.clear()
+        render(view: "login")
+    }
 
+    def authenticate() {
         println "in authenticate"
-        flash.message = ""
         request.getRequestDispatcher("/j_spring_security_check").forward(request, response)
     }
 

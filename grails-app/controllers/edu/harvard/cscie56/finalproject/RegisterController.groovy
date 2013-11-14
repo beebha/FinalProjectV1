@@ -13,7 +13,7 @@ class RegisterController {
     def index() {
 
         println "index"
-        flash.message = ""
+        flash.clear()
         render(view: "register")
     }
 
@@ -55,5 +55,4 @@ class RegisterController {
 
         redirect(controller: "home")
     }
-
 }

@@ -7,7 +7,7 @@ class HomeController {
     def index() {
 
         println "index"
-        flash.message = ""
+        flash.clear()
         render(view: "home")
     }
 }

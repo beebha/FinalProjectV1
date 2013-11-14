@@ -4,6 +4,6 @@ class LogoutController {
 
     def logout() {
         println "logout"
-
+        flash.clear()
     }
 }

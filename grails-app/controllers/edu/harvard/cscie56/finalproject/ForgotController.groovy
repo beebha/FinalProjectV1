@@ -11,7 +11,7 @@ class ForgotController {
     def index() {
 
         println "index"
-        flash.message = ""
+        flash.clear()
         render(view: "forgot")
     }
 
@@ -33,8 +33,6 @@ class ForgotController {
             render(view: "forgot", model: [forgotInstance: userInstance])
             return
         }
-
-        params.password = springSecurityService.encodePassword(params.password, params.username)
 
         userInstance.properties = params
 
