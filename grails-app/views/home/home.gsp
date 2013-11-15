@@ -3,7 +3,7 @@
 <head>
     <g:render template='../includes/header'/>
 </head>
-<body onload="getAllHomeData()">
+<body>
 <g:javascript src="application.js"/>
 <div data-role="page" id="homePage">
     <div data-theme="a" data-role="header">

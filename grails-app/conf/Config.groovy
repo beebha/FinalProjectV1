@@ -113,4 +113,5 @@ grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/loginfail'
 grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/loginfail'
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/home'
 grails.plugin.springsecurity.successHandler.ajaxSuccessUrl = '/home'
+grails.plugin.springsecurity.auth.loginFormUrl = '/'
 

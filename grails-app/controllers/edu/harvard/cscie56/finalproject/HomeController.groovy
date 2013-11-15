@@ -1,7 +1,7 @@
 package edu.harvard.cscie56.finalproject
+import grails.plugin.springsecurity.annotation.Secured
 
-import grails.converters.JSON
-
+@Secured('isAuthenticated()')
 class HomeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
