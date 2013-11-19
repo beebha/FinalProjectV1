@@ -19,7 +19,9 @@ class HomeController {
         println "mysurveyindex"
         flash.clear()
 
-        def categoriesAndCounts = getMySurveyCategoriesAndCount()
+        User user = User.load(springSecurityService.principal.id)
+
+        def categoriesAndCounts = SurveyUtils.getMySurveyCategoriesAndCount(user)
 
         render (view: 'home', model: [title: 'My Surveys', categoriesAndCounts: categoriesAndCounts])
 
@@ -29,41 +31,9 @@ class HomeController {
         println "allsurveyindex"
         flash.clear()
 
-        def categoriesAndCounts = getAllSurveyCategoriesAndCount()
+        def categoriesAndCounts = SurveyUtils.getAllSurveyCategoriesAndCount()
 
         render (view: 'home', model: [title: 'All Surveys', categoriesAndCounts: categoriesAndCounts])
 
-    }
-
-    private getMySurveyCategoriesAndCount() {
-        println "getMySurveyCategoriesAndCount"
-
-        User user = User.load(springSecurityService.principal.id)
-
-        def surveys = []
-        // get all survey categories and number of surveys in each list
-        for(singleCategory in Survey.constraints.category.inList) {
-
-            def surveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category", [user: user, category: singleCategory])
-            surveys.add([
-                category: singleCategory,
-                count: surveysOfLoggedInUser.size()
-            ])
-        }
-        return surveys
-    }
-
-    private getAllSurveyCategoriesAndCount() {
-        println "getAllSurveyCategoriesAndCount"
-
-        def surveys = []
-        // get all survey categories and number of surveys in each list
-        for(singleCategory in Survey.constraints.category.inList) {
-            surveys.add([
-                    category: singleCategory,
-                    count: Survey.findAllByCategory(singleCategory).size()
-            ])
-        }
-        return surveys
     }
 }

@@ -13,8 +13,6 @@
     </div>
     <div data-role="content">
         <h2>${title}</h2>
-
-        <!-- My Surveys -->
         <ul data-role="listview" data-divider-theme="b" data-inset="true">
             <li data-role="list-divider" role="heading">
                 ${title}
@@ -27,12 +25,12 @@
         </ul>
         <center>
             <g:if test="${title == 'My Surveys'}">
-                <g:link controller="survey" action="createView">
+                <g:link controller="survey" action="createSurvey">
                     <input type="button" value="Create Survey" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
                 </g:link>
             </g:if>
             <g:if test="${title == 'All Surveys'}">
-                <g:link controller="survey" action="takeView">
+                <g:link controller="survey" action="takeSurvey">
                     <input type="button" value="Take Survey" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
                 </g:link>
             </g:if>
@@ -41,16 +39,7 @@
             </g:link>
         </center>
         <br>
-        <div data-role="footer" data-id="persistent_navbar" data-position="fixed">
-            <div data-role="navbar" data-iconpos="bottom">
-                <ul>
-                    <li><a id="mysurveys" href="../home/mysurveyindex" data-icon="home">My Surveys</a></li>
-                    <li><a id="allsurveys" href="../home/allsurveyindex" data-icon="home">All Surveys</a></li>
-                    <li><a id="results" href="#" data-icon="grid">Results</a></li>
-                    <li><a id="favorites" href="#" data-icon="star">Favorites</a></li>
-                </ul>
-            </div>
-        </div>
+        <g:render template='../includes/footer'/>
     </div>
 </div>
 </body>

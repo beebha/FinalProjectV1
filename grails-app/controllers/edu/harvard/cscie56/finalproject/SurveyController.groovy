@@ -10,13 +10,9 @@ class SurveyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
-        redirect(action: "list", params: params)
-    }
-
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [surveyInstanceList: Survey.list(params), surveyInstanceTotal: Survey.count()]
+    def createSurvey() {
+        flash.clear()
+        render(view: "survey", model: [categories: SurveyUtils.getAllSurveyCategories()])
     }
 
     def create() {
@@ -33,30 +29,30 @@ class SurveyController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'survey.label', default: 'Survey'), surveyInstance.id])
-        redirect(action: "show", id: surveyInstance.id)
+//        redirect(action: "show", id: surveyInstance.id)
     }
 
-    def show(Long id) {
-        def surveyInstance = Survey.get(id)
-        if (!surveyInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), id])
-            redirect(action: "list")
-            return
-        }
+//    def show(Long id) {
+//        def surveyInstance = Survey.get(id)
+//        if (!surveyInstance) {
+//            flash.message = message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), id])
+//            redirect(action: "list")
+//            return
+//        }
+//
+//        [surveyInstance: surveyInstance]
+//    }
 
-        [surveyInstance: surveyInstance]
-    }
-
-    def edit(Long id) {
-        def surveyInstance = Survey.get(id)
-        if (!surveyInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [surveyInstance: surveyInstance]
-    }
+//    def edit(Long id) {
+//        def surveyInstance = Survey.get(id)
+//        if (!surveyInstance) {
+//            flash.message = message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), id])
+//            redirect(action: "list")
+//            return
+//        }
+//
+//        [surveyInstance: surveyInstance]
+//    }
 
     def update(Survey cmd, Long id, Long version) {
 

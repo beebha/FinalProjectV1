@@ -13,6 +13,6 @@ class Survey {
 
     static constraints = {
         name blank: false, unique: true
-        category blank: false, inList: ["Customer", "Education", "Entertainment", "Marketing", "Medical", "Office", "Technology", "Other"]
+        category blank: false, inList: ["Customer", "Education", "Entertainment", "Employment", "Marketing", "Medical", "Technology", "Other"]
     }
 }
