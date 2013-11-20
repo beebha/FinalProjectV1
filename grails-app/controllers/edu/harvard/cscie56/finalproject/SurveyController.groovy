@@ -1,34 +1,57 @@
 package edu.harvard.cscie56.finalproject
 
+import edu.harvard.cscie56.finalproject.auth.User
 import org.springframework.dao.DataIntegrityViolationException
 import grails.plugin.springsecurity.annotation.Secured
 
 @Secured('isAuthenticated()')
 class SurveyController {
 
+    def springSecurityService
     def surveyService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def createSurvey() {
+
+        println "createSurvey"
         flash.clear()
-        render(view: "survey", model: [categories: SurveyUtils.getAllSurveyCategories()])
+        render(view: "surveyStep1", model: [surveyInstance: new Survey(), categories: SurveyUtils.getAllSurveyCategories()])
     }
 
-    def create() {
-        [surveyInstance: new Survey(params)]
+    def saveSurveyStep1() {
+
+        println "saveSurveyStep1"
+
+        render(view: "survey", model: [categories: SurveyUtils.getAllSurveyCategories()])
+
+        User user = User.load(springSecurityService.principal.id)
+        def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), user)
+
+        if (surveyInstance.hasErrors()) {
+            render(view: "surveyStep1", model: [surveyInstance: surveyInstance])
+            return
+        }
+
+        render(view: "surveyStep2", model: [qnTypes: SurveyUtils.getAllQuestionTypes()])
     }
+
+
+
+//    def create() {
+//        [surveyInstance: new Survey(params)]
+//    }
 
     def save() {
         def userId = params.get('user').id
         def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), userId.toLong())
 
-        if (surveyInstance.hasErrors()) {
-            render(view: "create", model: [surveyInstance: surveyInstance])
-            return
-        }
+//        if (surveyInstance.hasErrors()) {
+//            render(view: "create", model: [surveyInstance: surveyInstance])
+//            return
+//        }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'survey.label', default: 'Survey'), surveyInstance.id])
+//        flash.message = message(code: 'default.created.message', args: [message(code: 'survey.label', default: 'Survey'), surveyInstance.id])
 //        redirect(action: "show", id: surveyInstance.id)
     }
 

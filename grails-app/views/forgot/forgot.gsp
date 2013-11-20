@@ -28,13 +28,13 @@
                 <label for="f_username">
                     Email
                 </label>
-                <input name="username" id="f_username" placeholder="" value="${forgotInstance?.username}" type="email">
+                <input name="username" id="f_username" placeholder="" value="${forgotInstance?.username}" type="email" required>
             </div>
             <div data-role="fieldcontain">
                 <label for="f_password">
                     New password
                 </label>
-                <input name="password" id="f_password" placeholder="" value="" type="password">
+                <input name="password" id="f_password" placeholder="" value="" type="password" required>
             </div>
             <center>
                 <input type="submit" data-inline="true" value="Reset">

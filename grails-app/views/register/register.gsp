@@ -28,13 +28,13 @@
                     <label for="r_username">
                         Email
                     </label>
-                    <input name="username" id="r_username" placeholder="" value="${registerInstance?.username}" type="email">
+                    <input name="username" id="r_username" placeholder="" value="${registerInstance?.username}" type="email" required>
                 </div>
                 <div data-role="fieldcontain">
                     <label for="r_password">
                         Password
                     </label>
-                    <input name="password" id="r_password" placeholder="" value="" type="password">
+                    <input name="password" id="r_password" placeholder="" value="" type="password" required>
                 </div>
                 <center>
                     <input type="submit" data-inline="true" value="Register">

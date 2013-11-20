@@ -38,4 +38,9 @@ class SurveyUtils {
         println "getAllSurveyCategories in SurveyUtils"
         Survey.constraints.category.inList
     }
+
+    public static getAllQuestionTypes() {
+        println "getAllQuestionTypes in SurveyUtils"
+        Question.constraints.type.inList
+    }
 }

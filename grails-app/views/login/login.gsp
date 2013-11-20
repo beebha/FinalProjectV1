@@ -21,13 +21,13 @@
                     <label for="username">
                         Email
                     </label>
-                    <input name="j_username" id="username" placeholder="" value="" type="email">
+                    <input name="j_username" id="username" placeholder="" value="" type="email" required>
                 </div>
                 <div data-role="fieldcontain">
                     <label for="password">
                         Password
                     </label>
-                    <input name="j_password" id="password" placeholder="" value="" type="password">
+                    <input name="j_password" id="password" placeholder="" value="" type="password" required>
                 </div>
                 <center>
                     <input type="submit" data-inline="true" value="Submit">
