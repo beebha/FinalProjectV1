@@ -21,9 +21,27 @@
             </ul>
         </g:hasErrors>
         <g:form controller="survey" action="saveSurveyStep2">
-
+            <h3>Add Question</h3>
+            <div data-role="fieldcontain">
+                <label for="questionText">
+                    Question Text
+                </label>
+                <input name="questionText" id="questionText" value="" type="text" data-mini="true" required>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="questiontypemenu">
+                    Question Type
+                </label>
+                <select id="questiontypemenu" name="type" data-mini="true">
+                    <g:each in='${qnTypes}' var='singleQnType'>
+                        <option value="${singleQnType}">${singleQnType}</option>
+                    </g:each>
+                </select>
+            </div>
+            <br>
             <center>
-                <input type="submit" value="Save & Continue" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" value="Save & Add Next Question" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
                 <g:render template='../includes/confirmLogout'/>
                 <a id="logoutBtn" href="#popupDialog" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Logout</a>
             </center>
