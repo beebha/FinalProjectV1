@@ -4,14 +4,30 @@ import edu.harvard.cscie56.finalproject.auth.User
 
 class SurveyUtils {
 
-    public static getMySurveyCategoriesAndCount(User user) {
+    public static getMyCompletedSurveyCategoriesAndCount(User user) {
         println "getMySurveyCategoriesAndCount in SurveyUtils"
 
         def surveys = []
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def surveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category", [user: user, category: singleCategory])
+            def surveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE", [user: user, category: singleCategory])
+            surveys.add([
+                    category: singleCategory,
+                    count: surveysOfLoggedInUser.size()
+            ])
+        }
+        return surveys
+    }
+
+    public static getMyIncompleteSurveyCategoriesAndCount(User user) {
+        println "getMySurveyCategoriesAndCount in SurveyUtils"
+
+        def surveys = []
+        // get all survey categories and number of surveys in each list
+        for(singleCategory in Survey.constraints.category.inList) {
+
+            def surveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = FALSE", [user: user, category: singleCategory])
             surveys.add([
                     category: singleCategory,
                     count: surveysOfLoggedInUser.size()
@@ -26,9 +42,11 @@ class SurveyUtils {
         def surveys = []
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
+
+            def completedSurveys = Survey.executeQuery("SELECT s FROM Survey s WHERE s.category = :category and s.complete = TRUE", [category: singleCategory])
             surveys.add([
                     category: singleCategory,
-                    count: Survey.findAllByCategory(singleCategory).size()
+                    count: completedSurveys.size()
             ])
         }
         return surveys

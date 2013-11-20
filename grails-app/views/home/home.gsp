@@ -13,16 +13,42 @@
     </div>
     <div data-role="content">
         <h2>${title}</h2>
-        <ul data-role="listview" data-divider-theme="b" data-inset="true">
-            <li data-role="list-divider" role="heading">
-                ${title}
-            </li>
-            <g:each in='${categoriesAndCounts}' var='singleCategoryInfo'>
-                <li data-theme="c">
-                    <a href="#page1" data-transition="slide">${singleCategoryInfo.category}<span class="ui-li-count">${singleCategoryInfo.count}</span></a>
+        <g:if test="${title == 'My Surveys'}">
+        <div data-role="collapsible-set" data-theme="b" data-mini="true" data-content-theme="d" data-inset="false">
+            <div data-role="collapsible">
+                <h2>Completed Surveys</h2>
+                <ul data-role="listview">
+                    <g:each in='${completedCategoriesAndCounts}' var='completedSingleCategoryInfo'>
+                        <li>
+                            <a href="#page1" data-transition="slide">${completedSingleCategoryInfo.category}<span class="ui-li-count">${completedSingleCategoryInfo.count}</span></a>
+                        </li>
+                    </g:each>
+                </ul>
+            </div>
+            <div data-role="collapsible">
+                <h2>Incomplete Surveys</h2>
+                <ul data-role="listview">
+                    <g:each in='${incompleteCategoriesAndCounts}' var='inCompleteSingleCategoryInfo'>
+                        <li>
+                            <a href="#page1" data-transition="slide">${inCompleteSingleCategoryInfo.category}<span class="ui-li-count">${inCompleteSingleCategoryInfo.count}</span></a>
+                        </li>
+                    </g:each>
+                </ul>
+            </div>
+        </g:if>
+        <g:if test="${title == 'All Surveys'}">
+            <ul data-role="listview" data-mini="true" data-divider-theme="b" data-inset="true">
+                <li data-role="list-divider" role="heading">
+                    ${title}
                 </li>
-            </g:each>
-        </ul>
+                <g:each in='${categoriesAndCounts}' var='singleCategoryInfo'>
+                    <li data-theme="c">
+                        <a href="#page1" data-transition="slide">${singleCategoryInfo.category}<span class="ui-li-count">${singleCategoryInfo.count}</span></a>
+                    </li>
+                </g:each>
+            </ul>
+        </g:if>
+        <br>
         <center>
             <g:if test="${title == 'My Surveys'}">
                 <g:link controller="survey" action="createSurvey">

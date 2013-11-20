@@ -12,7 +12,7 @@
         </h3>
     </div>
     <div data-role="content">
-        <h2>Create Survey</h2>
+        <h2>Create Survey (Step 2)</h2>
         <g:hasErrors bean="${surveyInstance}">
             <ul class="errorMsg" role="alert">
                 <g:eachError bean="${surveyInstance}" var="error">

@@ -26,7 +26,7 @@ class SurveyController {
         render(view: "survey", model: [categories: SurveyUtils.getAllSurveyCategories()])
 
         User user = User.load(springSecurityService.principal.id)
-        def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), user)
+        def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), false, user)
 
         if (surveyInstance.hasErrors()) {
             render(view: "surveyStep1", model: [surveyInstance: surveyInstance])

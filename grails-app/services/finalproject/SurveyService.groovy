@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class SurveyService {
 
-    Survey saveSurvey(String surveyName, String surveyCategory, User user) {
-        def surveyInstance = new Survey([name:surveyName, category:surveyCategory, user:user])
+    Survey saveSurvey(String surveyName, String surveyCategory, boolean complete, User user) {
+        def surveyInstance = new Survey([name:surveyName, category:surveyCategory, user:user, complete:complete])
         surveyInstance.save(flush: true)
         return surveyInstance
     }
