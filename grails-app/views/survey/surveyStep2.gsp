@@ -41,7 +41,37 @@
                     </g:each>
                 </select>
             </div>
-            <div id="answerSection"></div>
+            <div id="answerSection" style="display:none;">
+                <h3>Answer Options</h3>
+                <div id="answerSectionForMultipleChoiceAndRanking" style="display:none;">
+                    <div data-role="fieldcontain">
+                        <label for="optionText">
+                            Enter each option on a separate line.
+                        </label>
+                        <textarea name="optionText" id="optionText"></textarea>
+                    </div>
+                </div>
+                <div id="answerSectionForNumericalSliderAndDiscreteRating" style="display:none;">
+                    <div data-role="fieldcontain">
+                        <label for="scaleMenu" id="scaleMenuTxt"></label>
+                        <input name="scaleMenu" id="scaleMenu" data-mini="true" type="number" min="2">
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="scaleStartLbl" id="scaleStartLblTxt"></label>
+                        <input name="scaleStartLbl" id="scaleStartLbl" data-mini="true">
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="scaleEndLbl" id="scaleEndLblTxt"></label>
+                        <input name="scaleEndLbl" id="scaleEndLbl" data-mini="true">
+                    </div>
+                </div>
+                <fieldset data-role="controlgroup" data-type="vertical">
+                    <input id="addcomments" name="comment" data-theme="c" type="checkbox">
+                    <label for="addcomments">
+                        Add comment field
+                    </label>
+                </fieldset>
+            </div>
             <br>
             <center>
                 <input type="submit" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
