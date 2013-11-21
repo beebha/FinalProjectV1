@@ -1,5 +1,6 @@
 package edu.harvard.cscie56.finalproject
 
+import grails.converters.JSON
 import edu.harvard.cscie56.finalproject.auth.User
 import org.springframework.dao.DataIntegrityViolationException
 import grails.plugin.springsecurity.annotation.Secured
@@ -23,17 +24,17 @@ class SurveyController {
 
         println "saveSurveyStep1"
 
-        render(view: "survey", model: [categories: SurveyUtils.getAllSurveyCategories()])
-
         User user = User.load(springSecurityService.principal.id)
         def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), false, user)
 
         if (surveyInstance.hasErrors()) {
-            render(view: "surveyStep1", model: [surveyInstance: surveyInstance])
+            render(view: "surveyStep1", model: [surveyInstance: surveyInstance, categories: SurveyUtils.getAllSurveyCategories()])
             return
         }
 
-        render(view: "surveyStep2", model: [qnTypes: SurveyUtils.getAllQuestionTypes()])
+        def qnTypes = SurveyUtils.getAllQuestionTypes()
+
+        render(view: "surveyStep2", model: [qnTypes: qnTypes, qnTypesJSON: qnTypes as JSON])
     }
 
 

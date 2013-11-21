@@ -15,6 +15,15 @@ function clearButtonClicked(usernameID, passwordID)
     $('#'+passwordID).val('');
 }
 
+function questionTypeChange(allQnTypes)
+{
+    $.each(allQnTypes, function(index, value) {
+        if($('#questionTypeMenu').val() == value) {
+            console.log("Found selected type that matches: "+ $('#questionTypeMenu').val());
+        }
+    });
+}
+
 function isEmpty(objID) {
     return $.trim($('#'+objID).val()).length
 }

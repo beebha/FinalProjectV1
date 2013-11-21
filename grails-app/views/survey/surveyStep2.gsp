@@ -5,6 +5,9 @@
 </head>
 <body>
 <g:javascript src="application.js"/>
+<script>
+
+</script>
 <div data-role="page" id="homePage">
     <div data-theme="a" data-role="header">
         <h3>
@@ -29,15 +32,16 @@
                 <input name="questionText" id="questionText" value="" type="text" data-mini="true" required>
             </div>
             <div data-role="fieldcontain">
-                <label for="questiontypemenu">
+                <label for="questionTypeMenu">
                     Question Type
                 </label>
-                <select id="questiontypemenu" name="type" data-mini="true">
+                <select id="questionTypeMenu" name="type" data-mini="true" onchange='questionTypeChange(${qnTypesJSON});'>
                     <g:each in='${qnTypes}' var='singleQnType'>
                         <option value="${singleQnType}">${singleQnType}</option>
                     </g:each>
                 </select>
             </div>
+            <div id="answerSection"></div>
             <br>
             <center>
                 <input type="submit" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
