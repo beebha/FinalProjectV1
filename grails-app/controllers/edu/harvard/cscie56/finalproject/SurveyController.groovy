@@ -45,6 +45,20 @@ class SurveyController {
             println "Key is " + it.key
             println "Value is " + it.value
         }
+        def qnText = params.get("questionText")
+        def qnType = params.get("type")
+        def additionalComments = false
+
+        if(qnType != "Comment")
+        {
+            additionalComments = params.get("comment") == "on" ? true : false
+
+            if(qnType == "Numerical Slider Scale" || qnType == "Discrete Rating Scale") {
+
+            } else {
+
+            }
+        }
     }
 
 

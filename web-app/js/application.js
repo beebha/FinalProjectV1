@@ -62,20 +62,42 @@ function questionTypeChange(allQnTypes)
                 $("#option1").prop("required", false);
                 $("#option2").prop("required", false);
             }
+            $('#removeOptionBtn').hide();
             $('#moreOptions').html("");
             optionsCnt = 2;
         }
     });
 }
 
-function addOption() {
+function addOption()
+{
     optionsCnt++;
     var optionID = "option"+optionsCnt;
-    var optionHTMl = "<div data-role='fieldcontain'>" +
+    var mainOptionHtml = "<div data-role='fieldcontain'>" +
         "<label for='"+optionID+"'>Option "+optionsCnt+"</label>" +
         "<input name='"+optionID+"' id='"+optionID+"' data-mini='true' required>" +
         "</div>";
-    $('#moreOptions').append(optionHTMl).trigger("create");
+
+    if($('#'+optionID+'HTML').length > 0) {
+        $('#'+optionID+'HTML').html(mainOptionHtml).trigger("create");
+    } else {
+        $('#moreOptions').append("<div id='"+optionID+"HTML'>"+mainOptionHtml+"</div>").trigger("create");
+    }
+    $('#removeOptionBtn').show();
+}
+
+function removeOption()
+{
+    $('#option'+optionsCnt+'HTML').html("");
+    optionsCnt --;
+    if(optionsCnt == 2) {
+        $('#removeOptionBtn').hide();
+    }
+}
+
+
+function buttonClickedInSurveyStep2(btnName) {
+    $('#submitBtnClicked').val(btnName);
 }
 
 function isEmpty(objID) {

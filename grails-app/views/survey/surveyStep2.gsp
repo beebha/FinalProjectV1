@@ -21,6 +21,7 @@
             </ul>
         </g:hasErrors>
         <g:form controller="survey" action="saveSurveyStep2">
+            <input type="hidden" id="submitBtnClicked" name="submitBtnClicked" value="">
             <h3>Add Question</h3>
             <div data-role="fieldcontain">
                 <label for="questionText">
@@ -52,6 +53,7 @@
                     <div id="moreOptions"></div>
                     <center>
                         <input type="button" value="Add Option" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true" onclick="addOption();">
+                        <a id="removeOptionBtn" href="#" data-role="button" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true" onclick="removeOption();" style="display:none;">Remove Option</a>
                     </center>
                 </div>
                 <div id="answerSectionForNumericalSliderAndDiscreteRating" style="display:none;">
@@ -77,8 +79,8 @@
             </div>
             <br>
             <center>
-                <input type="submit" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
-                <input type="submit" value="Save & Add Next Question" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" onclick="buttonClickedInSurveyStep2('savecomplete');" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" onclick="buttonClickedInSurveyStep2('savenext');" value="Save & Add Next Question" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
                 <g:render template='../includes/confirmLogout'/>
                 <a id="logoutBtn" href="#popupDialog" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Logout</a>
             </center>
