@@ -21,7 +21,7 @@
                     <label for="username">
                         Email
                     </label>
-                    <input name="j_username" id="username" placeholder="" value="user@user.com" type="email" required>
+                    <input name="j_username" id="username" placeholder="" value="" type="email" required>
                 </div>
                 <div data-role="fieldcontain">
                     <label for="password">
