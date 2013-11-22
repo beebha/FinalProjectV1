@@ -5,9 +5,6 @@
 </head>
 <body>
 <g:javascript src="application.js"/>
-<script>
-
-</script>
 <div data-role="page" id="homePage">
     <div data-theme="a" data-role="header">
         <h3>
@@ -45,11 +42,17 @@
                 <h3>Answer Options</h3>
                 <div id="answerSectionForMultipleChoiceAndRanking" style="display:none;">
                     <div data-role="fieldcontain">
-                        <label for="optionText">
-                            Enter each option on a separate line.
-                        </label>
-                        <textarea name="optionText" id="optionText"></textarea>
+                        <label for="option1">Option 1</label>
+                        <input name="option1" id="option1" data-mini="true">
                     </div>
+                    <div data-role="fieldcontain">
+                        <label for="option2">Option 2</label>
+                        <input name="option2" id="option2" data-mini="true">
+                    </div>
+                    <div id="moreOptions"></div>
+                    <center>
+                        <input type="button" value="Add Option" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true" onclick="addOption();">
+                    </center>
                 </div>
                 <div id="answerSectionForNumericalSliderAndDiscreteRating" style="display:none;">
                     <div data-role="fieldcontain">

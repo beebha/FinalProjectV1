@@ -37,6 +37,16 @@ class SurveyController {
         render(view: "surveyStep2", model: [qnTypes: qnTypes, qnTypesJSON: qnTypes as JSON])
     }
 
+    def saveSurveyStep2() {
+        println "saveSurveyStep2"
+
+        def es=params.entrySet()
+        es.each{
+            println "Key is " + it.key
+            println "Value is " + it.value
+        }
+    }
+
 
 
 //    def create() {

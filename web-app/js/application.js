@@ -15,6 +15,8 @@ function clearButtonClicked(usernameID, passwordID)
     $('#'+passwordID).val('');
 }
 
+var optionsCnt = 2;
+
 function questionTypeChange(allQnTypes)
 {
     $.each(allQnTypes, function(index, value) {
@@ -39,20 +41,41 @@ function questionTypeChange(allQnTypes)
                     $("#scaleMenu").prop("required", true);
                     $("#scaleStartLbl").prop("required", true);
                     $("#scaleEndLbl").prop("required", true);
-                    $("#optionText").prop("required", false);
+                    $("#option1").prop("required", false);
+                    $("#option2").prop("required", false);
                 } else {
                     $('#answerSectionForNumericalSliderAndDiscreteRating').hide();
                     $('#answerSectionForMultipleChoiceAndRanking').show();
                     $("#scaleMenu").prop("required", false);
                     $("#scaleStartLbl").prop("required", false);
                     $("#scaleEndLbl").prop("required", false);
-                    $("#optionText").prop("required", true);
+                    $("#option1").prop("required", true);
+                    $("#option2").prop("required", true);
                 }
             } else {
                 $('#answerSection').hide();
+                $('#answerSectionForNumericalSliderAndDiscreteRating').hide();
+                $('#answerSectionForMultipleChoiceAndRanking').hide();
+                $("#scaleMenu").prop("required", false);
+                $("#scaleStartLbl").prop("required", false);
+                $("#scaleEndLbl").prop("required", false);
+                $("#option1").prop("required", false);
+                $("#option2").prop("required", false);
             }
+            $('#moreOptions').html("");
+            optionsCnt = 2;
         }
     });
+}
+
+function addOption() {
+    optionsCnt++;
+    var optionID = "option"+optionsCnt;
+    var optionHTMl = "<div data-role='fieldcontain'>" +
+        "<label for='"+optionID+"'>Option "+optionsCnt+"</label>" +
+        "<input name='"+optionID+"' id='"+optionID+"' data-mini='true' required>" +
+        "</div>";
+    $('#moreOptions').append(optionHTMl).trigger("create");
 }
 
 function isEmpty(objID) {
