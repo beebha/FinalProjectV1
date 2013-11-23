@@ -5,7 +5,7 @@
 </head>
 <body>
 <g:javascript src="application.js"/>
-<div data-role="page" id="homePage">
+<div data-role="page" id="homePage" data-add-back-btn="false">
     <div data-theme="a" data-role="header">
         <h3>
             CSCI-56 Final Project - Surveys Galore
@@ -20,7 +20,18 @@
                 <ul data-role="listview">
                     <g:each in='${completedCategoriesAndCounts}' var='completedSingleCategoryInfo'>
                         <li>
-                            <a href="#page1" data-transition="slide">${completedSingleCategoryInfo.category}<span class="ui-li-count">${completedSingleCategoryInfo.count}</span></a>
+                            <div>${completedSingleCategoryInfo.category}</div><div class="ui-li-count">${completedSingleCategoryInfo.count}</div>
+                            <g:if test="${completedSingleCategoryInfo.count > 0}">
+                                <ul>
+                                    <g:each in='${completedSingleCategoryInfo?.surveys}' var='completedSingleSurvey'>
+                                        <li>
+                                            <g:link controller="survey" action="showSurvey" params="[surveyID: completedSingleSurvey.id]">
+                                                ${completedSingleSurvey?.name}
+                                            </g:link>
+                                        </li>
+                                    </g:each>
+                                </ul>
+                            </g:if>
                         </li>
                     </g:each>
                 </ul>
@@ -30,7 +41,18 @@
                 <ul data-role="listview">
                     <g:each in='${incompleteCategoriesAndCounts}' var='inCompleteSingleCategoryInfo'>
                         <li>
-                            <a href="#page1" data-transition="slide">${inCompleteSingleCategoryInfo.category}<span class="ui-li-count">${inCompleteSingleCategoryInfo.count}</span></a>
+                            <div>${inCompleteSingleCategoryInfo.category}</div><div class="ui-li-count">${inCompleteSingleCategoryInfo.count}</div>
+                            <g:if test="${inCompleteSingleCategoryInfo.count > 0}">
+                                <ul>
+                                    <g:each in='${inCompleteSingleCategoryInfo?.surveys}' var='incompleteSingleSurvey'>
+                                        <li>
+                                            <g:link controller="survey" action="showSurvey" params="[surveyID: incompleteSingleSurvey.id]">
+                                                ${incompleteSingleSurvey?.name}
+                                            </g:link>
+                                        </li>
+                                    </g:each>
+                                </ul>
+                            </g:if>
                         </li>
                     </g:each>
                 </ul>
@@ -40,7 +62,18 @@
                 <ul data-role="listview">
                     <g:each in='${activeCategoriesAndCounts}' var='activeSingleCategoryInfo'>
                         <li>
-                            <a href="#page1" data-transition="slide">${activeSingleCategoryInfo.category}<span class="ui-li-count">${activeSingleCategoryInfo.count}</span></a>
+                            <div>${activeSingleCategoryInfo.category}</div><div class="ui-li-count">${activeSingleCategoryInfo.count}</div>
+                            <g:if test="${activeSingleCategoryInfo.count > 0}">
+                                <ul>
+                                    <g:each in='${activeSingleCategoryInfo?.surveys}' var='activeSingleSurvey'>
+                                        <li>
+                                            <g:link controller="survey" action="showSurvey" params="[surveyID: activeSingleSurvey.id]">
+                                                ${activeSingleSurvey?.name}
+                                            </g:link>
+                                        </li>
+                                    </g:each>
+                                </ul>
+                            </g:if>
                         </li>
                     </g:each>
                 </ul>
@@ -53,7 +86,18 @@
                 </li>
                 <g:each in='${categoriesAndCounts}' var='singleCategoryInfo'>
                     <li data-theme="c">
-                        <a href="#page1" data-transition="slide">${singleCategoryInfo.category}<span class="ui-li-count">${singleCategoryInfo.count}</span></a>
+                        <div>${singleCategoryInfo.category}</div><div class="ui-li-count">${singleCategoryInfo.count}</div>
+                        <g:if test="${singleCategoryInfo.count > 0}">
+                            <ul>
+                                <g:each in='${singleCategoryInfo?.surveys}' var='singleSurvey'>
+                                    <li>
+                                        <g:link controller="survey" action="showSurvey" params="[surveyID: singleSurvey.id]">
+                                            ${singleSurvey?.name}
+                                        </g:link>
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </g:if>
                     </li>
                 </g:each>
             </ul>

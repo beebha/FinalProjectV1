@@ -12,4 +12,9 @@
 
 <!-- jQuery and jQuery Mobile -->
 <script src="${resource(dir: 'js/jquery', file: 'jquery-1.9.1.js')}"></script>
+<script type="text/javascript">
+    $(document).bind("mobileinit", function() {
+        $.mobile.page.prototype.options.addBackBtn = true;
+    });
+</script>
 <script src="${resource(dir: 'js/jquery', file: 'jquery.mobile-1.3.2.js')}"></script>

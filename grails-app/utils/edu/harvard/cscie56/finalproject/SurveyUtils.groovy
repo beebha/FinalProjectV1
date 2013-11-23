@@ -11,10 +11,11 @@ class SurveyUtils {
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def surveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = TRUE", [user: user, category: singleCategory])
+            def publishedSurveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = TRUE", [user: user, category: singleCategory])
             surveys.add([
                     category: singleCategory,
-                    count: surveysOfLoggedInUser.size()
+                    surveys: publishedSurveysOfLoggedInUser,
+                    count: publishedSurveysOfLoggedInUser.size()
             ])
         }
         return surveys
@@ -27,10 +28,11 @@ class SurveyUtils {
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def surveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = FALSE", [user: user, category: singleCategory])
+            def completedSurveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = FALSE", [user: user, category: singleCategory])
             surveys.add([
                     category: singleCategory,
-                    count: surveysOfLoggedInUser.size()
+                    surveys: completedSurveysOfLoggedInUser,
+                    count: completedSurveysOfLoggedInUser.size()
             ])
         }
         return surveys
@@ -43,10 +45,11 @@ class SurveyUtils {
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def surveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = FALSE and s.active = FALSE", [user: user, category: singleCategory])
+            def incompleteSurveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = FALSE and s.active = FALSE", [user: user, category: singleCategory])
             surveys.add([
                     category: singleCategory,
-                    count: surveysOfLoggedInUser.size()
+                    surveys: incompleteSurveysOfLoggedInUser,
+                    count: incompleteSurveysOfLoggedInUser.size()
             ])
         }
         return surveys
@@ -59,10 +62,11 @@ class SurveyUtils {
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def completedSurveys = Survey.executeQuery("SELECT s FROM Survey s WHERE s.category = :category and s.complete = TRUE and s.active = TRUE", [category: singleCategory])
+            def publishedSurveys = Survey.executeQuery("SELECT s FROM Survey s WHERE s.category = :category and s.complete = TRUE and s.active = TRUE", [category: singleCategory])
             surveys.add([
                     category: singleCategory,
-                    count: completedSurveys.size()
+                    surveys: publishedSurveys,
+                    count: publishedSurveys.size()
             ])
         }
         return surveys
