@@ -4,13 +4,21 @@ class Question {
 
     String questionText
     String type
-    boolean comment
-    String commentText
+
+    Integer scale
+    String startLabel
+    String endLabel
+
+    List<String> options
+
+    Boolean overallComment
 
     static belongsTo = [survey: Survey]
-    static hasMany = [options: Option]
 
     static constraints = {
+        startLabel nullable: true
+        endLabel nullable: true
+        options nullable:true
         questionText blank: false
         type blank: false, inList: [
                 "Comment",

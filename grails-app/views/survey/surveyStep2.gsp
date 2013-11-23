@@ -21,7 +21,9 @@
             </ul>
         </g:hasErrors>
         <g:form controller="survey" action="saveSurveyStep2">
-            <input type="hidden" id="submitBtnClicked" name="submitBtnClicked" value="">
+            <g:hiddenField name="surveyID" value="${surveyID}"/>
+            <input type="hidden" id="submitBtnClicked" name="submitBtnClicked">
+            <input type="hidden" id="totalOptions" name="totalOptions">
             <h3>Add Question</h3>
             <div data-role="fieldcontain">
                 <label for="questionText">
@@ -59,7 +61,17 @@
                 <div id="answerSectionForNumericalSliderAndDiscreteRating" style="display:none;">
                     <div data-role="fieldcontain">
                         <label for="scaleMenu" id="scaleMenuTxt"></label>
-                        <input name="scaleMenu" id="scaleMenu" data-mini="true" type="number" min="2">
+                        <select id="scaleMenu" name="scale" data-mini="true">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
                     </div>
                     <div data-role="fieldcontain">
                         <label for="scaleStartLbl" id="scaleStartLblTxt"></label>
@@ -79,8 +91,9 @@
             </div>
             <br>
             <center>
-                <input type="submit" onclick="buttonClickedInSurveyStep2('savecomplete');" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
-                <input type="submit" onclick="buttonClickedInSurveyStep2('savenext');" value="Save & Add Next Question" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" onclick="additionalInfoSurveyStep2('savenext');" value="Save & Add Next Question" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" onclick="additionalInfoSurveyStep2('savelater');" value="Save & Continue Later" data-icon="home" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" onclick="additionalInfoSurveyStep2('savecomplete');" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
                 <g:render template='../includes/confirmLogout'/>
                 <a id="logoutBtn" href="#popupDialog" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Logout</a>
             </center>

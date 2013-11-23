@@ -95,11 +95,11 @@ function removeOption()
     }
 }
 
-
-function buttonClickedInSurveyStep2(btnName) {
+function additionalInfoSurveyStep2(btnName) {
     $('#submitBtnClicked').val(btnName);
+    $('#totalOptions').val(optionsCnt);
 }
 
 function isEmpty(objID) {
-    return $.trim($('#'+objID).val()).length
+    return $.trim($('#'+objID).val()).length;
 }

@@ -21,10 +21,16 @@ class HomeController {
 
         User user = User.load(springSecurityService.principal.id)
 
+        def activeCategoriesAndCounts = SurveyUtils.getMyActiveSurveyCategoriesAndCount(user)
         def completedCategoriesAndCounts = SurveyUtils.getMyCompletedSurveyCategoriesAndCount(user)
         def incompleteCategoriesAndCounts = SurveyUtils.getMyIncompleteSurveyCategoriesAndCount(user)
 
-        render (view: 'home', model: [title: 'My Surveys', completedCategoriesAndCounts: completedCategoriesAndCounts, incompleteCategoriesAndCounts:incompleteCategoriesAndCounts])
+        render (view: 'home', model: [
+                title: 'My Surveys',
+                activeCategoriesAndCounts: activeCategoriesAndCounts,
+                completedCategoriesAndCounts: completedCategoriesAndCounts,
+                incompleteCategoriesAndCounts:incompleteCategoriesAndCounts
+        ])
 
     }
 

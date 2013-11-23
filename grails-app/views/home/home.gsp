@@ -35,6 +35,16 @@
                     </g:each>
                 </ul>
             </div>
+            <div data-role="collapsible">
+                <h2>Published Surveys</h2>
+                <ul data-role="listview">
+                    <g:each in='${activeCategoriesAndCounts}' var='activeSingleCategoryInfo'>
+                        <li>
+                            <a href="#page1" data-transition="slide">${activeSingleCategoryInfo.category}<span class="ui-li-count">${activeSingleCategoryInfo.count}</span></a>
+                        </li>
+                    </g:each>
+                </ul>
+            </div>
         </g:if>
         <g:if test="${title == 'All Surveys'}">
             <ul data-role="listview" data-mini="true" data-divider-theme="b" data-inset="true">

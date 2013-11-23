@@ -10,6 +10,7 @@ class SurveyController {
 
     def springSecurityService
     def surveyService
+    def questionService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -25,113 +26,91 @@ class SurveyController {
         println "saveSurveyStep1"
 
         User user = User.load(springSecurityService.principal.id)
-        def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), false, user)
+        def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), false, false, user)
 
         if (surveyInstance.hasErrors()) {
             render(view: "surveyStep1", model: [surveyInstance: surveyInstance, categories: SurveyUtils.getAllSurveyCategories()])
             return
         }
-
-        def qnTypes = SurveyUtils.getAllQuestionTypes()
-
-        render(view: "surveyStep2", model: [qnTypes: qnTypes, qnTypesJSON: qnTypes as JSON])
+        showSurveyStep2(surveyInstance.id)
     }
 
     def saveSurveyStep2() {
         println "saveSurveyStep2"
 
-        def es=params.entrySet()
-        es.each{
-            println "Key is " + it.key
-            println "Value is " + it.value
-        }
+        def surveyID = Long.valueOf(params.get("surveyID").toString())
+
+        def btnAction = params.get("submitBtnClicked")
         def qnText = params.get("questionText")
         def qnType = params.get("type")
         def additionalComments = false
 
+        def options = []
+        def scale = 0
+        def startLabel = ""
+        def endLabel = ""
+
+        // get required question attributes
         if(qnType != "Comment")
         {
             additionalComments = params.get("comment") == "on" ? true : false
 
             if(qnType == "Numerical Slider Scale" || qnType == "Discrete Rating Scale") {
-
+                scale = Integer.valueOf(params.get("scale").toString())
+                startLabel = params.get("scaleStartLbl")
+                endLabel = params.get("scaleEndLbl")
             } else {
-
+                int totalOptions = Integer.valueOf(params.get("totalOptions").toString())
+                for(int i=1; i <= totalOptions; i++) {
+                    options.add(params.get("option"+i))
+                }
             }
         }
-    }
 
-
-
-//    def create() {
-//        [surveyInstance: new Survey(params)]
-//    }
-
-    def save() {
-        def userId = params.get('user').id
-        def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), userId.toLong())
-
-//        if (surveyInstance.hasErrors()) {
-//            render(view: "create", model: [surveyInstance: surveyInstance])
-//            return
-//        }
-
-//        flash.message = message(code: 'default.created.message', args: [message(code: 'survey.label', default: 'Survey'), surveyInstance.id])
-//        redirect(action: "show", id: surveyInstance.id)
-    }
-
-//    def show(Long id) {
-//        def surveyInstance = Survey.get(id)
-//        if (!surveyInstance) {
-//            flash.message = message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), id])
-//            redirect(action: "list")
-//            return
-//        }
-//
-//        [surveyInstance: surveyInstance]
-//    }
-
-//    def edit(Long id) {
-//        def surveyInstance = Survey.get(id)
-//        if (!surveyInstance) {
-//            flash.message = message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), id])
-//            redirect(action: "list")
-//            return
-//        }
-//
-//        [surveyInstance: surveyInstance]
-//    }
-
-    def update(Survey cmd, Long id, Long version) {
-
-        def surveyInstance = Survey.get(id)
-        if (!surveyInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), id])
-            redirect(action: "list")
+        // save question
+        def questionInstance = questionService.saveQuestion(qnText, qnType, scale, startLabel, endLabel, options, additionalComments, surveyID)
+        if (questionInstance.hasErrors()) {
+            showSurveyStep2(surveyID)
             return
         }
 
-        if (version != null) {
-            if (surveyInstance.version > version) {
-                surveyInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'survey.label', default: 'Survey')] as Object[],
-                        "Another user has updated this Survey while you were editing")
-                render(view: "edit", model: [surveyInstance: surveyInstance])
-                return
-            }
-        }
-        if(surveyInstance.surveyResults.size() > 0) {
-            surveyInstance.errors.rejectValue("version", "default.not.updated.surveyresults.message",
-                    [message(code: 'survey.label', default: 'Survey')] as Object[],
-                    "This Survey has results and cannot be updated.")
-            render(view: "edit", model: [surveyInstance: surveyInstance])
-            return
-        }
+        // redirect based on button clicked
+        if(btnAction == 'savenext') {
+            showSurveyStep2(surveyID)
+        } else if(btnAction == 'savelater') {
+            showHome()
+        } else {
+            saveSurveyShowHome(surveyID)
 
-        surveyService.updateSurvey(surveyInstance, cmd)
+        }
+    }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'survey.label', default: 'Survey'), surveyInstance.id])
-        redirect(action: "show", id: surveyInstance.id)
+    def showSurveyStep2(Long surveyID) {
+
+        println "showSurveyStep2"
+
+        def qnTypes = SurveyUtils.getAllQuestionTypes()
+
+        render(view: "surveyStep2", model: [surveyID: surveyID, qnTypes: qnTypes, qnTypesJSON: qnTypes as JSON])
+    }
+
+    def saveSurveyShowHome(Long surveyID) {
+
+        println "saveSurveyShowHome"
+
+        def surveyInstance = Survey.get(surveyID)
+
+        surveyInstance.complete = true;
+        surveyInstance.save(flush: true)
+
+        showHome()
+    }
+
+    def showHome() {
+
+        println "showHome"
+
+        redirect(controller: "home", view: "home")
     }
 
     def delete(Long id) {

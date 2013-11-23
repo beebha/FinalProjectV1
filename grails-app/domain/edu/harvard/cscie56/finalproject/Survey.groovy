@@ -6,7 +6,8 @@ class Survey {
 
     String name
     String category
-    boolean complete
+    Boolean complete
+    Boolean active
     User user
     Date dateCreated
 
@@ -16,5 +17,6 @@ class Survey {
         name blank: false, unique: true
         category blank: false, inList: ["Customer", "Education", "Entertainment", "Employment", "Marketing", "Medical", "Technology", "Other"]
         complete nullable: false
+        active nullable: false
     }
 }
