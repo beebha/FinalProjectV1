@@ -113,6 +113,14 @@ class SurveyController {
         redirect(controller: "home", view: "home")
     }
 
+    def viewSurvey(Long surveyID) {
+
+        println "showSurvey"
+        println "To show survey details of survey with ID: "+surveyID
+        def surveyInstance = Survey.get(id)
+
+    }
+
     def delete(Long id) {
         def surveyInstance = Survey.get(id)
         if (!surveyInstance) {

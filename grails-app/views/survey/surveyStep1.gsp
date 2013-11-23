@@ -5,7 +5,7 @@
 </head>
 <body>
 <g:javascript src="application.js"/>
-<div data-role="page" id="homePage">
+<div data-role="page" id="surveyStep1Page">
     <div data-theme="a" data-role="header">
         <h3>
             CSCI-56 Final Project - Surveys Galore

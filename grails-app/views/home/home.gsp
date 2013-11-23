@@ -25,7 +25,7 @@
                                 <ul>
                                     <g:each in='${completedSingleCategoryInfo?.surveys}' var='completedSingleSurvey'>
                                         <li>
-                                            <g:link controller="survey" action="showSurvey" params="[surveyID: completedSingleSurvey.id]">
+                                            <g:link controller="survey" action="viewSurvey" params="[surveyID: completedSingleSurvey.id]">
                                                 ${completedSingleSurvey?.name}
                                             </g:link>
                                         </li>
@@ -46,7 +46,7 @@
                                 <ul>
                                     <g:each in='${inCompleteSingleCategoryInfo?.surveys}' var='incompleteSingleSurvey'>
                                         <li>
-                                            <g:link controller="survey" action="showSurvey" params="[surveyID: incompleteSingleSurvey.id]">
+                                            <g:link controller="survey" action="viewSurvey" params="[surveyID: incompleteSingleSurvey.id]">
                                                 ${incompleteSingleSurvey?.name}
                                             </g:link>
                                         </li>
@@ -67,7 +67,7 @@
                                 <ul>
                                     <g:each in='${activeSingleCategoryInfo?.surveys}' var='activeSingleSurvey'>
                                         <li>
-                                            <g:link controller="survey" action="showSurvey" params="[surveyID: activeSingleSurvey.id]">
+                                            <g:link controller="survey" action="viewSurvey" params="[surveyID: activeSingleSurvey.id]">
                                                 ${activeSingleSurvey?.name}
                                             </g:link>
                                         </li>
@@ -91,7 +91,7 @@
                             <ul>
                                 <g:each in='${singleCategoryInfo?.surveys}' var='singleSurvey'>
                                     <li>
-                                        <g:link controller="survey" action="showSurvey" params="[surveyID: singleSurvey.id]">
+                                        <g:link controller="survey" action="viewSurvey" params="[surveyID: singleSurvey.id]">
                                             ${singleSurvey?.name}
                                         </g:link>
                                     </li>
