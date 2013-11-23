@@ -21,7 +21,7 @@ class SurveyUtils {
     }
 
     public static getMyCompletedSurveyCategoriesAndCount(User user) {
-        println "getMySurveyCategoriesAndCount in SurveyUtils"
+        println "getMyCompletedSurveyCategoriesAndCount in SurveyUtils"
 
         def surveys = []
         // get all survey categories and number of surveys in each list
@@ -37,7 +37,7 @@ class SurveyUtils {
     }
 
     public static getMyIncompleteSurveyCategoriesAndCount(User user) {
-        println "getMySurveyCategoriesAndCount in SurveyUtils"
+        println "getMyIncompleteSurveyCategoriesAndCount in SurveyUtils"
 
         def surveys = []
         // get all survey categories and number of surveys in each list
