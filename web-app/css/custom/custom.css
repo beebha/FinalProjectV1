@@ -16,3 +16,8 @@ h2 {
 a.ui-link{
     text-decoration: none;
 }
+
+.ui-btn-inner{
+    text-overflow: initial;
+    padding-left: 5px;
+}

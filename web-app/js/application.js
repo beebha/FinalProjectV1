@@ -8,20 +8,6 @@ if (typeof jQuery !== 'undefined') {
 	})(jQuery);
 }
 
-$.fn.extend({
-    sliderLabels: function(left,right) {
-        var $this = $(this);
-        var $sliderdiv= $this.next("div.ui-slider[role='application']");
-        $sliderdiv
-            .css({'font-weight': 'normal'});
-        $sliderdiv
-            .prepend('<span class="ui-slider-inner-label" style="position: absolute; left:0px; top:20px; text-shadow:none; color:black; font-weight:normal">'+left+ '</span>')
-            .append('<span class="ui-slider-inner-label" style="position: absolute; right:0px; bottom:20px; text-shadow:none; color:black; font-weight:normal">'+right+ '</span>');
-    }
-});
-
-$('#slider').sliderLabels('LEFT','RIGHT');
-
 function clearButtonClicked(usernameID, passwordID)
 {
     console.log("clearButtonClicked");
@@ -109,12 +95,14 @@ function removeOption()
     }
 }
 
-function additionalInfoSurveyStep2(btnName) {
+function additionalInfoSurveyStep2(btnName)
+{
     $('#submitBtnClicked').val(btnName);
     $('#totalOptions').val(optionsCnt);
 }
 
-function editQn(qnID) {
+function editQn(qnID)
+{
     console.log(qnID);
 }
 

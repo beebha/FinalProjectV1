@@ -5,7 +5,7 @@
 </head>
 <body>
     <g:javascript src="application.js" />
-    <div data-role="page" id="loginPage">
+    <div data-role="page" id="loginPage" data-add-back-btn="false">
         <div data-theme="a" data-role="header">
             <h3>
                 CSCI-56 Final Project - Surveys Galore

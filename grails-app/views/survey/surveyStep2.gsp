@@ -91,8 +91,8 @@
             </div>
             <br>
             <center>
-                <input type="submit" onclick="additionalInfoSurveyStep2('savenext');" value="Save & Add Next Question" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
-                <input type="submit" onclick="additionalInfoSurveyStep2('savelater');" value="Save & Continue Later" data-icon="home" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" onclick="additionalInfoSurveyStep2('savenext');" value="Save & Add Next Question" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" onclick="additionalInfoSurveyStep2('savelater');" value="Save & Continue Later" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
                 <input type="submit" onclick="additionalInfoSurveyStep2('savecomplete');" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
                 <g:render template='../includes/confirmLogout'/>
                 <a id="logoutBtn" href="#popupDialog" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Logout</a>

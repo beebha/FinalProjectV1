@@ -82,7 +82,7 @@
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
                                 <legend>
-                                    Choose:
+                                    Choose
                                 </legend>
                                 <g:set var="optionCntMultiple" value="${1}"/>
                                 <g:each in='${singleQn?.options}' var='singleOption'>
@@ -98,9 +98,13 @@
                     <g:if test="${singleQn?.type == 'Numerical Slider Scale'}">
                         <div data-role="fieldcontain">
                             <label for="qn${currentQnCnt}Slider">
-                                Value
+                                Choose
                             </label>
-                            <input id="qn${currentQnCnt}Slider" name="qn${currentQnCnt}Slider" type="range" value="${singleQn?.scale}" min="0" max="${singleQn?.scale}" data-highlight="true" data-mini="true">
+                            <span class="ui-slider-inner-label" style="position: absolute; left:31%; top:30px; text-shadow:none; color:black; font-weight:normal">${singleQn?.startLabel}</span>
+                            <input id="qn${currentQnCnt}Slider" name="qn${currentQnCnt}Slider"
+                                   type="range" value="${singleQn?.scale}" min="0" max="${singleQn?.scale}"
+                                   data-highlight="true" data-mini="true">
+                            <span class="ui-slider-inner-label" style="position: absolute; right:2%; top:30px; text-shadow:none; color:black; font-weight:normal">${singleQn?.endLabel}</span>
                         </div>
                     </g:if>
                     <g:if test="${singleQn?.type == 'Ranking'}">
@@ -131,10 +135,24 @@
                                 <g:each in="${1..singleQn?.scale}">
                                     <input id="qn${currentQnCnt}RadioH${it}" name="qn${currentQnCnt}RadioH" data-theme="c" type="radio">
                                     <label for="qn${currentQnCnt}RadioH${it}">
-                                        ${it}
+                                        <g:if test="${it == 1}">
+                                            ${singleQn?.startLabel}
+                                        </g:if>
+                                        <g:if test="${it == singleQn?.scale}">
+                                            ${singleQn?.endLabel}
+                                        </g:if>
+                                        <br>${it}
                                     </label>
                                 </g:each>
                             </fieldset>
+                        </div>
+                    </g:if>
+                    <g:if test="${singleQn?.overallComment == true}">
+                        <div data-role="fieldcontain">
+                            <label for="qn${currentQnCnt}AdditionalComments">
+                                Comments
+                            </label>
+                            <textarea name="qn${currentQnCnt}AdditionalComments" id="qn${currentQnCnt}AdditionalComments"></textarea>
                         </div>
                     </g:if>
                     <br>
@@ -143,22 +161,26 @@
                             <g:if test="${singleQn?.type != 'Comment'}">
                                 <input type="button" value="Edit Question" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true" onclick="editQn(${currentQnCnt});">
                             </g:if>
-                            <input type="button" value="Delete Question" data-icon="delete" data-iconpos="right" data-mini="true" data-inline="true">
+                            <g:link controller="survey" action="deleteQn" params="[surveyID: surveyInstance?.id, qn: singleQn?.id]">
+                                <input type="button" value="Delete Question" data-icon="delete" data-iconpos="right" data-mini="true" data-inline="true">
+                            </g:link>
                         </center>
                     </g:if>
                 </div>
             </div>
             <g:set var="currentQnCnt" value="${currentQnCnt + 1}"/>
         </g:each>
-        <center><h3>END OF SURVEY</h3></center>
+        <br><center><h3>END OF SURVEY</h3></center><br>
         <center>
             <g:if test="${surveyState == 'active'}">
-                <input type="submit" value="Deactivate Survey" data-icon="home" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" value="Deactivate Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
             </g:if>
             <g:if test="${surveyState == 'complete'}">
-                <input type="submit" value="Save & Publish Survey" data-icon="home" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" value="Save & Add Question" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" value="Save & Publish Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
             </g:if>
             <g:if test="${surveyState == 'incomplete'}">
+                <input type="submit" value="Save & Add Question" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
                 <input type="submit" value="Save & Continue Later" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
                 <input type="submit" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
             </g:if>
