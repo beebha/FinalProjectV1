@@ -118,14 +118,6 @@ class SurveyController {
         println "viewSurvey"
         println "Survey details of ID "+surveyID+" for state "+surveyState
 
-        for (tmp in Survey.get(surveyID).questions) {
-            println tmp.id
-            println tmp.scale
-            println tmp.startLabel
-            println tmp.endLabel
-            println tmp.options
-        }
-
         render(view: "viewSurvey", model: [surveyInstance: Survey.get(surveyID), surveyState: surveyState, categories: SurveyUtils.getAllSurveyCategories()])
     }
 
