@@ -23,6 +23,10 @@ class QuestionService {
                 surveyId: surveyId,
                 survey: survey])
         questionInstance.save(flush: true)
+
+        println questionInstance.id
+        println questionInstance.options
+
         return questionInstance
     }
 

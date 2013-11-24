@@ -19,4 +19,8 @@ class Survey {
         complete nullable: false
         active nullable: false
     }
+
+    static mapping = {
+        questions sort: 'id', order: 'asc'
+    }
 }

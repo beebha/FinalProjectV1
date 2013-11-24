@@ -1,5 +1,5 @@
-<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
-    <div data-role="header" data-theme="a" class="ui-corner-top">
+<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" class="ui-corner-all" data-add-back-btn="false">
+    <div data-role="header" data-theme="a" class="ui-corner-top" data-add-back-btn="false">
         <h1>Confirm Logout</h1>
     </div>
     <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">

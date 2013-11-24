@@ -25,7 +25,7 @@
                                 <ul>
                                     <g:each in='${completedSingleCategoryInfo?.surveys}' var='completedSingleSurvey'>
                                         <li>
-                                            <g:link controller="survey" action="viewSurvey" params="[surveyID: completedSingleSurvey.id]">
+                                            <g:link controller="survey" action="viewSurvey" params="[surveyState:'complete', surveyID: completedSingleSurvey.id]">
                                                 ${completedSingleSurvey?.name}
                                             </g:link>
                                         </li>
@@ -46,7 +46,7 @@
                                 <ul>
                                     <g:each in='${inCompleteSingleCategoryInfo?.surveys}' var='incompleteSingleSurvey'>
                                         <li>
-                                            <g:link controller="survey" action="viewSurvey" params="[surveyID: incompleteSingleSurvey.id]">
+                                            <g:link controller="survey" action="viewSurvey" params="[surveyState:'incomplete', surveyID: incompleteSingleSurvey.id]">
                                                 ${incompleteSingleSurvey?.name}
                                             </g:link>
                                         </li>
@@ -67,7 +67,7 @@
                                 <ul>
                                     <g:each in='${activeSingleCategoryInfo?.surveys}' var='activeSingleSurvey'>
                                         <li>
-                                            <g:link controller="survey" action="viewSurvey" params="[surveyID: activeSingleSurvey.id]">
+                                            <g:link controller="survey" action="viewSurvey" params="[surveyState:'active', surveyID: activeSingleSurvey.id]">
                                                 ${activeSingleSurvey?.name}
                                             </g:link>
                                         </li>

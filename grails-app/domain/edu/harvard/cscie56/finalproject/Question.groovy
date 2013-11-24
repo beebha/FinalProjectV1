@@ -9,11 +9,13 @@ class Question {
     String startLabel
     String endLabel
 
-    List<String> options
+    List options
 
     Boolean overallComment
 
     static belongsTo = [survey: Survey]
+
+    static hasMany = [options: String]
 
     static constraints = {
         startLabel nullable: true
