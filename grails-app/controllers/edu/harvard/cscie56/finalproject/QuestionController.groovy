@@ -1,5 +1,6 @@
 package edu.harvard.cscie56.finalproject
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import grails.plugin.springsecurity.annotation.Secured
 
@@ -9,6 +10,58 @@ class QuestionController {
     def questionService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+
+    def deleteQn(Long surveyID, Long questionID, String surveyState) {
+        println "deleteQn"
+
+        def surveyInstance = Survey.get(surveyID)
+        if(surveyInstance.questions.size() == 1) {
+            flash.message = "Question was not deleted. Survey must have at least one question."
+            redirect(controller: 'survey', action: 'viewSurvey', params: [surveyState:surveyState ,surveyID:surveyID])
+            return
+        }
+
+        def questionInstance = Question.get(questionID)
+
+        try {
+            questionService.deleteQuestion(questionInstance)
+            flash.message = "Question was successfully deleted"
+            redirect(controller: 'survey', action: 'viewSurvey', params: [surveyState:surveyState ,surveyID:surveyID])
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = "Question was not deleted"
+            redirect(controller: 'survey', action: 'viewSurvey', params: [surveyState:surveyState ,surveyID:surveyID])
+        }
+    }
+
+    def editQn(Long surveyID, Long questionID, String surveyState) {
+        println "editQn"
+
+        def qnTypes = SurveyUtils.getAllQuestionTypes()
+
+        render(view: 'viewQuestion', model: [
+                surveyState:surveyState,
+                surveyID:surveyID,
+                qnTypes: qnTypes,
+                qnTypesJSON: qnTypes as JSON,
+                questionInstance: Question.get(questionID)
+        ])
+    }
+
+    def saveQn() {
+
+        println "saveQn"
+
+    }
+
+
+
+
+
+
+
+
+
 
     def index() {
         redirect(action: "list", params: params)

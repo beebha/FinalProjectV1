@@ -13,6 +13,9 @@
     </div>
     <div data-role="content">
         <h2>View Survey - ${surveyInstance?.name}</h2>
+        <g:if test="${flash.message}">
+            <div class="errorMsg">${flash.message}</div>
+        </g:if>
         <div data-role="fieldcontain">
             <label for="surveyname">
                 Name
@@ -159,9 +162,11 @@
                     <g:if test="${surveyState != 'active'}">
                         <center>
                             <g:if test="${singleQn?.type != 'Comment'}">
-                                <input type="button" value="Edit Question" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true" onclick="editQn(${currentQnCnt});">
+                                <g:link controller="question" action="editQn" params="[surveyID: surveyInstance?.id, questionID: singleQn?.id, surveyState: surveyState]">
+                                    <input type="button" value="Edit Question" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
+                                </g:link>
                             </g:if>
-                            <g:link controller="survey" action="deleteQn" params="[surveyID: surveyInstance?.id, qn: singleQn?.id]">
+                            <g:link controller="question" action="deleteQn" params="[surveyID: surveyInstance?.id, questionID: singleQn?.id, surveyState: surveyState]">
                                 <input type="button" value="Delete Question" data-icon="delete" data-iconpos="right" data-mini="true" data-inline="true">
                             </g:link>
                         </center>
