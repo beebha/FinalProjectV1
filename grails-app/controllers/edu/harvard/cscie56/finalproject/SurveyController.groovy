@@ -60,9 +60,14 @@ class SurveyController {
                 startLabel = params.get("scaleStartLbl")
                 endLabel = params.get("scaleEndLbl")
             } else {
-                int totalOptions = Integer.valueOf(params.get("totalOptions").toString())
-                for(int i=1; i <= totalOptions; i++) {
-                    options.add(params.get("option"+i))
+//                int totalOptions = Integer.valueOf(params.get("totalOptions").toString())
+//                for(int i=1; i <= totalOptions; i++) {
+//                    options.add(params.get("option"+i))
+//                }
+                int totalOptions = 1;
+                while(params.get("option"+totalOptions) != null) {
+                    options.add(params.get("option"+totalOptions))
+                    totalOptions++;
                 }
             }
         }

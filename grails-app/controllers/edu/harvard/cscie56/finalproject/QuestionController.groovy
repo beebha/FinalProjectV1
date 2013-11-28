@@ -39,7 +39,7 @@ class QuestionController {
 
         def qnTypes = SurveyUtils.getAllQuestionTypes()
 
-        render(view: 'viewQuestion', model: [
+        render(view: 'editQuestion', model: [
                 surveyState:surveyState,
                 surveyID:surveyID,
                 qnTypes: qnTypes,
@@ -52,110 +52,48 @@ class QuestionController {
 
         println "saveQn"
 
-    }
-
-
-
-
-
-
-
-
-
-
-    def index() {
-        redirect(action: "list", params: params)
-    }
-
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [questionInstanceList: Question.list(params), questionInstanceTotal: Question.count()]
-    }
-
-    def create() {
-        [questionInstance: new Question(params)]
-    }
-
-    def save() {
-        def surveyId = params.get('survey').id
-        def questionInstance = questionService.saveQuestion(params.get("questionText"), params.get("type"), surveyId.toLong())
-
-        if (questionInstance.hasErrors()) {
-            render(view: "create", model: [questionInstance: questionInstance])
-            return
+        def es=params.entrySet()
+        es.each{
+            println "Key is " + it.key
+            println "Value is " + it.value
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'question.label', default: 'Question'), questionInstance.id])
-        redirect(action: "show", id: questionInstance.id)
-    }
+        def surveyID = Long.valueOf(params.get("surveyID").toString())
+        def questionID = Long.valueOf(params.get("questionID").toString())
+        def surveyState = params.get("surveyState")
 
-    def show(Long id) {
-        def questionInstance = Question.get(id)
-        if (!questionInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), id])
-            redirect(action: "list")
-            return
-        }
+        def qnText = params.get("questionText")
+        def qnType = params.get("type")
+        def additionalComments = false
 
-        [questionInstance: questionInstance]
-    }
+        def options = []
+        def scale = 0
+        def startLabel = ""
+        def endLabel = ""
 
-    def edit(Long id) {
-        def questionInstance = Question.get(id)
-        if (!questionInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), id])
-            redirect(action: "list")
-            return
-        }
+        // get required question attributes
+        if(qnType != "Comment")
+        {
+            additionalComments = params.get("comment") == "on" ? true : false
 
-        [questionInstance: questionInstance]
-    }
-
-    def update(Question cmd, Long id, Long version) {
-        if (!cmd.validate()) {
-            render(view: "edit", model: [questionInstance: cmd])
-            return
-        }
-
-        def questionInstance = Question.get(id)
-        if (!questionInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), id])
-            redirect(action: "list")
-            return
-        }
-
-        if (version != null) {
-            if (questionInstance.version > version) {
-                questionInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'question.label', default: 'Question')] as Object[],
-                        "Another user has updated this Question while you were editing")
-                render(view: "edit", model: [questionInstance: questionInstance])
-                return
+            if(qnType == "Numerical Slider Scale" || qnType == "Discrete Rating Scale") {
+                scale = Integer.valueOf(params.get("scale").toString())
+                startLabel = params.get("scaleStartLbl")
+                endLabel = params.get("scaleEndLbl")
+            } else {
+                int totalOptions = 1;
+                while(params.get("option"+totalOptions) != null) {
+                    options.add(params.get("option"+totalOptions))
+                    totalOptions++;
+                }
             }
         }
 
-        questionService.updateQuestion(questionInstance, cmd)
+        // save question
+        def questionInstance = Question.get(questionID)
+        questionService.updateQuestion(questionInstance, qnText, qnType, scale, startLabel, endLabel, options, additionalComments)
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'question.label', default: 'Question'), questionInstance.id])
-        redirect(action: "show", id: questionInstance.id)
-    }
+        redirect(controller: 'survey', action: 'viewSurvey', params: [surveyID: surveyID, surveyState:surveyState])
 
-    def delete(Long id) {
-        def questionInstance = Question.get(id)
-        if (!questionInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            questionService.deleteQuestion(questionInstance)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'question.label', default: 'Question'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'question.label', default: 'Question'), id])
-            redirect(action: "show", id: id)
-        }
     }
 }

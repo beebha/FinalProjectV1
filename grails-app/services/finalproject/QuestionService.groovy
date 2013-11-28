@@ -27,8 +27,17 @@ class QuestionService {
         return questionInstance
     }
 
-    def updateQuestion(Question questionInstance, Question cmd) {
-        questionInstance.properties['questionText', 'type', 'surveyId', 'survey'] = cmd.properties
+    def updateQuestion(Question questionInstance, String questionText, String type, Integer scale,
+                       String startLabel, String endLabel, List<String> options,
+                       Boolean overallComment) {
+
+        questionInstance.questionText = questionText
+        questionInstance.type = type
+        questionInstance.scale = scale
+        questionInstance.startLabel = startLabel
+        questionInstance.endLabel = endLabel
+        questionInstance.options = options
+        questionInstance.overallComment = overallComment
         questionInstance.save(flush: true)
     }
 

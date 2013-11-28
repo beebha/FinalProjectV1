@@ -23,7 +23,6 @@
         <g:form controller="survey" action="saveSurveyStep2">
             <g:hiddenField name="surveyID" value="${surveyID}"/>
             <input type="hidden" id="submitBtnClicked" name="submitBtnClicked">
-            <input type="hidden" id="totalOptions" name="totalOptions">
             <h3>Add Question</h3>
             <div data-role="fieldcontain">
                 <label for="questionText">
@@ -35,7 +34,7 @@
                 <label for="questionTypeMenu">
                     Question Type
                 </label>
-                <select id="questionTypeMenu" name="type" data-mini="true" onchange='questionTypeChange(${qnTypesJSON});'>
+                <select id="questionTypeMenu" name="type" data-mini="true" onchange='questionTypeChange(${qnTypesJSON}, 2, "");'>
                     <g:each in='${qnTypes}' var='singleQnType'>
                         <option value="${singleQnType}">${singleQnType}</option>
                     </g:each>

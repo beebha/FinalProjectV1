@@ -17,19 +17,20 @@ function clearButtonClicked(usernameID, passwordID)
 
 var optionsCnt = 2;
 
-function questionTypeChange(allQnTypes)
+function questionTypeChange(allQnTypes, totalOptionsCnt, qnView)
 {
     $.each(allQnTypes, function(index, value) {
-        if($('#questionTypeMenu').val() == value)
+        if($('#questionTypeMenu'+qnView).val() == value)
         {
-            if($('#questionTypeMenu').val() != "Comment")
+            console.log("in here!");
+            if($('#questionTypeMenu'+qnView).val() != "Comment")
             {
                 $('#answerSection').show();
-                if($('#questionTypeMenu').val() == "Discrete Rating Scale" || $('#questionTypeMenu').val() == "Numerical Slider Scale")
+                if($('#questionTypeMenu'+qnView).val() == "Discrete Rating Scale" || $('#questionTypeMenu'+qnView).val() == "Numerical Slider Scale")
                 {
                     $('#answerSectionForNumericalSliderAndDiscreteRating').show();
                     $('#answerSectionForMultipleChoiceAndRanking').hide();
-                    if($('#questionTypeMenu').val() == "Discrete Rating Scale") {
+                    if($('#questionTypeMenu'+qnView).val() == "Discrete Rating Scale") {
                         $("#scaleMenuTxt").html("Discrete Rating Scale");
                         $("#scaleStartLblTxt").html("Discrete Rating Scale Start Label");
                         $("#scaleEndLblTxt").html("Discrete Rating Scale End Label");
@@ -64,7 +65,7 @@ function questionTypeChange(allQnTypes)
             }
             $('#removeOptionBtn').hide();
             $('#moreOptions').html("");
-            optionsCnt = 2;
+            optionsCnt = totalOptionsCnt;
         }
     });
 }
@@ -98,12 +99,6 @@ function removeOption()
 function additionalInfoSurveyStep2(btnName)
 {
     $('#submitBtnClicked').val(btnName);
-    $('#totalOptions').val(optionsCnt);
-}
-
-function editQn(qnID)
-{
-    console.log(qnID);
 }
 
 function isEmpty(objID) {
