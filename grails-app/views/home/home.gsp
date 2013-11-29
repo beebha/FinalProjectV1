@@ -91,7 +91,7 @@
                             <ul>
                                 <g:each in='${singleCategoryInfo?.surveys}' var='singleSurvey'>
                                     <li>
-                                        <g:link controller="survey" action="viewSurvey" params="[surveyID: singleSurvey.id]">
+                                        <g:link controller="survey" action="takeSurvey" params="[surveyID: singleSurvey.id]">
                                             ${singleSurvey?.name}
                                         </g:link>
                                     </li>
@@ -107,11 +107,6 @@
             <g:if test="${title == 'My Surveys'}">
                 <g:link controller="survey" action="createSurvey">
                     <input type="button" value="Create Survey" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
-                </g:link>
-            </g:if>
-            <g:if test="${title == 'All Surveys'}">
-                <g:link controller="survey" action="takeSurvey">
-                    <input type="button" value="Take Survey" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
                 </g:link>
             </g:if>
             <g:link controller="logout" action="logout">

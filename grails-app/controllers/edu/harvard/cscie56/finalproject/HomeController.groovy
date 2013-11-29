@@ -29,7 +29,7 @@ class HomeController {
                 title: 'My Surveys',
                 activeCategoriesAndCounts: activeCategoriesAndCounts,
                 completedCategoriesAndCounts: completedCategoriesAndCounts,
-                incompleteCategoriesAndCounts:incompleteCategoriesAndCounts
+                incompleteCategoriesAndCounts: incompleteCategoriesAndCounts
         ])
 
     }

@@ -60,10 +60,6 @@ class SurveyController {
                 startLabel = params.get("scaleStartLbl")
                 endLabel = params.get("scaleEndLbl")
             } else {
-//                int totalOptions = Integer.valueOf(params.get("totalOptions").toString())
-//                for(int i=1; i <= totalOptions; i++) {
-//                    options.add(params.get("option"+i))
-//                }
                 int totalOptions = 1;
                 while(params.get("option"+totalOptions) != null) {
                     options.add(params.get("option"+totalOptions))
@@ -124,6 +120,14 @@ class SurveyController {
         println "Survey details of ID "+surveyID+" for state "+surveyState
 
         render(view: "viewSurvey", model: [surveyInstance: Survey.get(surveyID), surveyState: surveyState, categories: SurveyUtils.getAllSurveyCategories()])
+    }
+
+    def takeSurvey(Long surveyID) {
+
+        println "takeSurvey"
+        println "Taking survey of ID "+surveyID
+
+        render(view: "takeSurvey", model: [surveyInstance: Survey.get(surveyID)])
     }
 
     def delete(Long id) {

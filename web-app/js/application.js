@@ -101,6 +101,11 @@ function additionalInfoSurveyStep2(btnName)
     $('#submitBtnClicked').val(btnName);
 }
 
+function setRatingValues(id, count)
+{
+
+}
+
 function isEmpty(objID) {
     return $.trim($('#'+objID).val()).length;
 }
