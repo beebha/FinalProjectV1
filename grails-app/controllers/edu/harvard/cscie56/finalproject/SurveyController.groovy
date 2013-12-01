@@ -130,6 +130,61 @@ class SurveyController {
         render(view: "takeSurvey", model: [surveyInstance: Survey.get(surveyID)])
     }
 
+    def updateSurvey(Long surveyID) {
+        println "updateSurvey"
+        println "Updating survey of ID "+surveyID
+
+        def es=params.entrySet()
+        es.each{
+            println "Key is " + it.key
+            println "Value is " + it.value
+        }
+
+        def surveyInstance = Survey.get(surveyID)
+
+        if(params.get("deactivate") != null) {
+            // check to see if survey has results
+            if(surveyInstance.surveyResults.size() > 0) {
+                flash.message = "Survey has results and cannot be deactivated"
+                viewSurvey('active', surveyID)
+                return
+            } else {
+                surveyInstance.active = false
+                surveyInstance.save(flush: true)
+                flash.message = "Survey has been deactivated"
+                viewSurvey('complete', surveyID)
+                return
+            }
+        }
+
+        if (params.get("saveadd") != null ||
+                params.get("savepublish") != null ||
+                params.get("savecontinue") != null ||
+                params.get("savecomplete") != null) {
+
+            surveyInstance.name = params.get("name")
+            surveyInstance.category = params.get("category")
+
+            surveyInstance.save(flush: true)
+
+            if(params.get("saveadd") != null) {
+                showSurveyStep2(surveyID)
+            } else if (params.get("savepublish") != null) {
+                surveyInstance.active = true
+                surveyInstance.save(flush: true)
+                viewSurvey('active', surveyID)
+                return
+            } else if (params.get("savecontinue") != null) {
+                showHome()
+            } else if (params.get("savecomplete") != null) {
+                surveyInstance.complete = true
+                surveyInstance.save(flush: true)
+                viewSurvey('complete', surveyID)
+                return
+            }
+        }
+    }
+
     def delete(Long id) {
         def surveyInstance = Survey.get(id)
         if (!surveyInstance) {

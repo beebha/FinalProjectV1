@@ -16,6 +16,8 @@
         <g:if test="${flash.message}">
             <div class="errorMsg">${flash.message}</div>
         </g:if>
+        <g:form controller="survey" action="updateSurvey">
+        <g:hiddenField name="surveyID" value="${surveyInstance?.id}"/>
         <div data-role="fieldcontain">
             <label for="surveyname">
                 Name
@@ -178,20 +180,21 @@
         <br><center><h3>END OF SURVEY</h3></center><br>
         <center>
             <g:if test="${surveyState == 'active'}">
-                <input type="submit" value="Deactivate Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" name="deactivate" value="Deactivate Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
             </g:if>
             <g:if test="${surveyState == 'complete'}">
-                <input type="submit" value="Save & Add Question" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
-                <input type="submit" value="Save & Publish Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" name="saveadd" value="Save & Add Question" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" name="savepublish" value="Save & Publish Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
             </g:if>
             <g:if test="${surveyState == 'incomplete'}">
-                <input type="submit" value="Save & Add Question" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
-                <input type="submit" value="Save & Continue Later" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
-                <input type="submit" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" name="saveadd" value="Save & Add Question" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" name="savecontinue" value="Save & Continue Later" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" name="savecomplete" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
             </g:if>
             <g:render template='../includes/confirmLogout'/>
             <a id="logoutBtn" href="#popupDialog" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Logout</a>
         </center>
+        </g:form>
         <g:render template='../includes/footer'/>
     </div>
 </div>
