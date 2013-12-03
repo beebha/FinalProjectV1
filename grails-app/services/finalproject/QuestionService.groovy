@@ -29,8 +29,8 @@ class QuestionService {
 
     def updateQuestion(Question questionInstance, String questionText, String type, Integer scale,
                        String startLabel, String endLabel, List<String> options,
-                       Boolean overallComment) {
-
+                       Boolean overallComment)
+    {
         questionInstance.questionText = questionText
         questionInstance.type = type
         questionInstance.scale = scale
@@ -41,7 +41,8 @@ class QuestionService {
         questionInstance.save(flush: true)
     }
 
-    def deleteQuestion(Question questionInstance) {
+    def deleteQuestion(Question questionInstance)
+    {
         questionInstance.delete(flush: true)
     }
 }

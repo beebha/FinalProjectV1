@@ -8,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class SurveyResultService {
 
-    SurveyResult saveSurveyResult(String surveyName, Long userId, Long surveyId) {
+    SurveyResult saveSurveyResult(String surveyName, Long userId, Long surveyId)
+    {
         def user = User.get(userId)
         def survey = Survey.get(surveyId)
         def surveyResultInstance = new SurveyResult([name:surveyName, user:user, surveyId:surveyId, survey:survey])
