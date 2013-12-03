@@ -11,9 +11,8 @@ class QuestionController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def deleteQn(Long surveyID, Long questionID, String surveyState) {
-        println "deleteQn"
-
+    def deleteQn(Long surveyID, Long questionID, String surveyState)
+    {
         def surveyInstance = Survey.get(surveyID)
         if(surveyInstance.questions.size() == 1) {
             flash.message = "Question was not deleted. Survey must have at least one question."
@@ -34,9 +33,8 @@ class QuestionController {
         }
     }
 
-    def editQn(Long surveyID, Long questionID, String surveyState) {
-        println "editQn"
-
+    def editQn(Long surveyID, Long questionID, String surveyState)
+    {
         def qnTypes = SurveyUtils.getAllQuestionTypes()
 
         render(view: 'editQuestion', model: [
@@ -48,16 +46,8 @@ class QuestionController {
         ])
     }
 
-    def saveQn() {
-
-        println "saveQn"
-
-        def es=params.entrySet()
-        es.each{
-            println "Key is " + it.key
-            println "Value is " + it.value
-        }
-
+    def saveQn()
+    {
         def surveyID = Long.valueOf(params.get("surveyID").toString())
         def questionID = Long.valueOf(params.get("questionID").toString())
         def surveyState = params.get("surveyState")
@@ -94,6 +84,5 @@ class QuestionController {
         questionService.updateQuestion(questionInstance, qnText, qnType, scale, startLabel, endLabel, options, additionalComments)
 
         redirect(controller: 'survey', action: 'viewSurvey', params: [surveyID: surveyID, surveyState:surveyState])
-
     }
 }

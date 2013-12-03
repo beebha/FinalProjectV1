@@ -16,8 +16,8 @@
         <g:if test="${flash.message}">
             <div class="errorMsg">${flash.message}</div>
         </g:if>
+        <g:form controller="survey" action="saveSurveyResults">
         <h3>${surveyInstance?.name} - (${surveyInstance?.category})</h3>
-
         <g:set var="currentQnCnt" value="${1}"/>
         <g:each in='${surveyInstance?.questions}' var='singleQn'>
             <div id="question${currentQnCnt}">
@@ -141,6 +141,7 @@
             <g:render template='../includes/confirmLogout'/>
             <a id="logoutBtn" href="#popupDialog" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Logout</a>
         </center>
+        </g:form>
         <g:render template='../includes/footer'/>
     </div>
 </div>

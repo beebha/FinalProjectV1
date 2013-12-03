@@ -10,7 +10,6 @@ if (typeof jQuery !== 'undefined') {
 
 function clearButtonClicked(usernameID, passwordID)
 {
-    console.log("clearButtonClicked");
     $('#'+usernameID).val('');
     $('#'+passwordID).val('');
 }
@@ -22,7 +21,6 @@ function questionTypeChange(allQnTypes, totalOptionsCnt, qnView)
     $.each(allQnTypes, function(index, value) {
         if($('#questionTypeMenu'+qnView).val() == value)
         {
-            console.log("in here!");
             if($('#questionTypeMenu'+qnView).val() != "Comment")
             {
                 $('#answerSection').show();

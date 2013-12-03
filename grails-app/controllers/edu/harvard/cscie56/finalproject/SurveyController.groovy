@@ -14,17 +14,14 @@ class SurveyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def createSurvey() {
-
-        println "createSurvey"
+    def createSurvey()
+    {
         flash.clear()
         render(view: "surveyStep1", model: [surveyInstance: new Survey(), categories: SurveyUtils.getAllSurveyCategories()])
     }
 
-    def saveSurveyStep1() {
-
-        println "saveSurveyStep1"
-
+    def saveSurveyStep1()
+    {
         User user = User.load(springSecurityService.principal.id)
         def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), false, false, user)
 
@@ -35,9 +32,8 @@ class SurveyController {
         showSurveyStep2(surveyInstance.id)
     }
 
-    def saveSurveyStep2() {
-        println "saveSurveyStep2"
-
+    def saveSurveyStep2()
+    {
         def surveyID = Long.valueOf(params.get("surveyID").toString())
 
         def btnAction = params.get("submitBtnClicked")
@@ -82,23 +78,18 @@ class SurveyController {
             showHome()
         } else {
             saveSurveyShowHome(surveyID)
-
         }
     }
 
-    def showSurveyStep2(Long surveyID) {
-
-        println "showSurveyStep2"
-
+    def showSurveyStep2(Long surveyID)
+    {
         def qnTypes = SurveyUtils.getAllQuestionTypes()
 
         render(view: "surveyStep2", model: [surveyID: surveyID, qnTypes: qnTypes, qnTypesJSON: qnTypes as JSON])
     }
 
-    def saveSurveyShowHome(Long surveyID) {
-
-        println "saveSurveyShowHome"
-
+    def saveSurveyShowHome(Long surveyID)
+    {
         def surveyInstance = Survey.get(surveyID)
 
         surveyInstance.complete = true;
@@ -107,39 +98,23 @@ class SurveyController {
         showHome()
     }
 
-    def showHome() {
-
-        println "showHome"
-
+    def showHome()
+    {
         redirect(controller: "home", view: "home")
     }
 
-    def viewSurvey(String surveyState, Long surveyID) {
-
-        println "viewSurvey"
-        println "Survey details of ID "+surveyID+" for state "+surveyState
-
+    def viewSurvey(String surveyState, Long surveyID)
+    {
         render(view: "viewSurvey", model: [surveyInstance: Survey.get(surveyID), surveyState: surveyState, categories: SurveyUtils.getAllSurveyCategories()])
     }
 
-    def takeSurvey(Long surveyID) {
-
-        println "takeSurvey"
-        println "Taking survey of ID "+surveyID
-
+    def takeSurvey(Long surveyID)
+    {
         render(view: "takeSurvey", model: [surveyInstance: Survey.get(surveyID)])
     }
 
-    def updateSurvey(Long surveyID) {
-        println "updateSurvey"
-        println "Updating survey of ID "+surveyID
-
-        def es=params.entrySet()
-        es.each{
-            println "Key is " + it.key
-            println "Value is " + it.value
-        }
-
+    def updateSurvey(Long surveyID)
+    {
         def surveyInstance = Survey.get(surveyID)
 
         if(params.get("deactivate") != null) {
@@ -182,6 +157,16 @@ class SurveyController {
                 viewSurvey('complete', surveyID)
                 return
             }
+        }
+    }
+
+    def saveSurveyResults()
+    {
+        println "saveSurveyResults"
+        def es=params.entrySet()
+        es.each{
+            println "Key is " + it.key
+            println "Value is " + it.value
         }
     }
 

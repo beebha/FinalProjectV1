@@ -10,13 +10,14 @@ class HomeController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
+    def index()
+    {
         flash.clear()
         mysurveyindex()
     }
 
-    def mysurveyindex() {
-        println "mysurveyindex"
+    def mysurveyindex()
+    {
         flash.clear()
 
         User user = User.load(springSecurityService.principal.id)
@@ -34,13 +35,12 @@ class HomeController {
 
     }
 
-    def allsurveyindex() {
-        println "allsurveyindex"
+    def allsurveyindex()
+    {
         flash.clear()
 
         def categoriesAndCounts = SurveyUtils.getAllSurveyCategoriesAndCount()
 
         render (view: 'home', model: [title: 'All Surveys', categoriesAndCounts: categoriesAndCounts])
-
     }
 }
