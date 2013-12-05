@@ -17,6 +17,7 @@
             <div class="errorMsg">${flash.message}</div>
         </g:if>
         <g:form controller="survey" action="saveSurveyResults">
+        <g:hiddenField name="surveyID" value="${surveyInstance?.id}"/>
         <h3>${surveyInstance?.name} - (${surveyInstance?.category})</h3>
         <g:set var="currentQnCnt" value="${1}"/>
         <g:each in='${surveyInstance?.questions}' var='singleQn'>
@@ -26,10 +27,10 @@
                 <div data-role="fieldcontain">
                     <g:if test="${singleQn?.type == 'Comment'}">
                         <div data-role="fieldcontain">
-                            <label for="qn${currentQnCnt}Comments">
+                            <label for="qn${singleQn?.id}">
                                 Comments
                             </label>
-                            <textarea name="qn${currentQnCnt}Comments" id="qn${currentQnCnt}Comments" required></textarea>
+                            <textarea name="qn${singleQn?.id}" id="qn${singleQn?.id}" required></textarea>
                         </div>
                     </g:if>
                     <g:if test="${singleQn?.type == 'Multiple Choice (One Answer)'}">
@@ -40,7 +41,7 @@
                                 </legend>
                                 <g:set var="optionCntOne" value="${1}"/>
                                 <g:each in='${singleQn?.options}' var='singleOption'>
-                                    <input id="qn${currentQnCnt}Radio${optionCntOne}" name="qn${currentQnCnt}Radio" data-theme="c" type="radio" required>
+                                    <input id="qn${currentQnCnt}Radio${optionCntOne}" name="qn${singleQn?.id}" data-theme="c" type="radio" required>
                                     <label for="qn${currentQnCnt}Radio${optionCntOne}">
                                         ${singleOption}
                                     </label>
@@ -51,13 +52,13 @@
                     </g:if>
                     <g:if test="${singleQn?.type == 'Multiple Choice (Multiple Answers)'}">
                         <div data-role="fieldcontain">
-                            <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+                            <fieldset data-role="controlgroup" data-type="vertical" data-mini="true" required>
                                 <legend>
                                     Choose
                                 </legend>
                                 <g:set var="optionCntMultiple" value="${1}"/>
                                 <g:each in='${singleQn?.options}' var='singleOption'>
-                                    <input id="qn${currentQnCnt}Checkbox${optionCntMultiple}" data-theme="c" type="checkbox" required>
+                                    <input id="qn${currentQnCnt}Checkbox${optionCntMultiple}" name="qn${singleQn?.id}" data-theme="c" type="checkbox">
                                     <label for="qn${currentQnCnt}Checkbox${optionCntMultiple}">
                                         ${singleOption}
                                     </label>
@@ -72,7 +73,7 @@
                                 Choose
                             </label>
                             <span class="ui-slider-inner-label" style="position: absolute; left:31%; top:30px; text-shadow:none; color:black; font-weight:normal">${singleQn?.startLabel}</span>
-                            <input id="qn${currentQnCnt}Slider" name="qn${currentQnCnt}Slider"
+                            <input id="qn${currentQnCnt}Slider" name="qn${singleQn?.id}"
                                    type="range" value="${singleQn?.scale}" min="0" max="${singleQn?.scale}"
                                    data-highlight="true" data-mini="true" required>
                             <span class="ui-slider-inner-label" style="position: absolute; right:2%; top:30px; text-shadow:none; color:black; font-weight:normal">${singleQn?.endLabel}</span>
@@ -89,6 +90,7 @@
                                     <li data-role="fieldcontain">
                                         <select data-mini="true" data-inline="true"
                                                 id="qn${currentQnCnt}RankSelect${optionCntRank}"
+                                                name="qn${singleQn?.id}"
                                                 onchange="setRatingValues('qn${currentQnCnt}RankSelect${optionCntRank}', '${singleQn?.options?.size()}')">
                                             <g:each in="${1..singleQn?.options?.size()}">
                                                 <option value="${it}">${it}</option>
@@ -108,7 +110,7 @@
                                     Choose
                                 </legend>
                                 <g:each in="${1..singleQn?.scale}">
-                                    <input id="qn${currentQnCnt}RadioH${it}" name="qn${currentQnCnt}RadioH" data-theme="c" type="radio" required>
+                                    <input id="qn${currentQnCnt}RadioH${it}" name="qn${singleQn?.id}" data-theme="c" type="radio" required>
                                     <label for="qn${currentQnCnt}RadioH${it}">
                                         <g:if test="${it == 1}">
                                             ${singleQn?.startLabel}
@@ -127,7 +129,7 @@
                             <label for="qn${currentQnCnt}AdditionalComments">
                                 Comments
                             </label>
-                            <textarea name="qn${currentQnCnt}AdditionalComments" id="qn${currentQnCnt}AdditionalComments"></textarea>
+                            <textarea name="qn${singleQn?.id}AdditionalComments" id="qn${currentQnCnt}AdditionalComments"></textarea>
                         </div>
                     </g:if>
                     <br>

@@ -70,14 +70,21 @@ function questionTypeChange(allQnTypes, totalOptionsCnt, qnView)
 
 function addOption()
 {
-    optionsCnt++;
+    var currentOptionsCount = 3;
+
+    while($('#option'+currentOptionsCount+'HTML').length > 0 && $('#option'+currentOptionsCount+'HTML').html() != "") {
+        currentOptionsCount++;
+    }
+
+    optionsCnt = currentOptionsCount > 3 ? currentOptionsCount : optionsCnt+1;
+
     var optionID = "option"+optionsCnt;
     var mainOptionHtml = "<div data-role='fieldcontain'>" +
         "<label for='"+optionID+"'>Option "+optionsCnt+"</label>" +
         "<input name='"+optionID+"' id='"+optionID+"' data-mini='true' required>" +
         "</div>";
 
-    if($('#'+optionID+'HTML').length > 0) {
+    if($('#'+optionID+'HTML').html() == "") {
         $('#'+optionID+'HTML').html(mainOptionHtml).trigger("create");
     } else {
         $('#moreOptions').append("<div id='"+optionID+"HTML'>"+mainOptionHtml+"</div>").trigger("create");
@@ -102,8 +109,4 @@ function additionalInfoSurveyStep2(btnName)
 function setRatingValues(id, count)
 {
 
-}
-
-function isEmpty(objID) {
-    return $.trim($('#'+objID).val()).length;
 }

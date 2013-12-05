@@ -1,4 +1,4 @@
-package finalproject
+package edu.harvard.cscie56.finalproject
 
 import edu.harvard.cscie56.finalproject.Answer
 import edu.harvard.cscie56.finalproject.SurveyResult

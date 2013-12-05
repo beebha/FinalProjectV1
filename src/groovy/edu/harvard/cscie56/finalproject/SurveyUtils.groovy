@@ -1,17 +1,19 @@
 package edu.harvard.cscie56.finalproject
 
+import edu.harvard.cscie56.finalproject.Question
+import edu.harvard.cscie56.finalproject.Survey
 import edu.harvard.cscie56.finalproject.auth.User
 
 class SurveyUtils {
 
-    public static getMyActiveSurveyCategoriesAndCount(User user) {
-        println "getMyActiveSurveyCategoriesAndCount in SurveyUtils"
-
+    public static getMyActiveSurveyCategoriesAndCount(User user)
+    {
         def surveys = []
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def publishedSurveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = TRUE", [user: user, category: singleCategory])
+            def publishedSurveysOfLoggedInUser = Survey.executeQuery(
+                    "SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = TRUE", [user: user, category: singleCategory])
             surveys.add([
                     category: singleCategory,
                     surveys: publishedSurveysOfLoggedInUser,
@@ -21,14 +23,14 @@ class SurveyUtils {
         return surveys
     }
 
-    public static getMyCompletedSurveyCategoriesAndCount(User user) {
-        println "getMyCompletedSurveyCategoriesAndCount in SurveyUtils"
-
+    public static getMyCompletedSurveyCategoriesAndCount(User user)
+    {
         def surveys = []
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def completedSurveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = FALSE", [user: user, category: singleCategory])
+            def completedSurveysOfLoggedInUser = Survey.executeQuery(
+                    "SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = FALSE", [user: user, category: singleCategory])
             surveys.add([
                     category: singleCategory,
                     surveys: completedSurveysOfLoggedInUser,
@@ -38,14 +40,14 @@ class SurveyUtils {
         return surveys
     }
 
-    public static getMyIncompleteSurveyCategoriesAndCount(User user) {
-        println "getMyIncompleteSurveyCategoriesAndCount in SurveyUtils"
-
+    public static getMyIncompleteSurveyCategoriesAndCount(User user)
+    {
         def surveys = []
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def incompleteSurveysOfLoggedInUser = Survey.executeQuery("SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = FALSE and s.active = FALSE", [user: user, category: singleCategory])
+            def incompleteSurveysOfLoggedInUser = Survey.executeQuery(
+                    "SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = FALSE and s.active = FALSE", [user: user, category: singleCategory])
             surveys.add([
                     category: singleCategory,
                     surveys: incompleteSurveysOfLoggedInUser,
@@ -55,14 +57,14 @@ class SurveyUtils {
         return surveys
     }
 
-    public static getAllSurveyCategoriesAndCount() {
-        println "getAllSurveyCategoriesAndCount in SurveyUtils"
-
+    public static getAllSurveyCategoriesAndCount()
+    {
         def surveys = []
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def publishedSurveys = Survey.executeQuery("SELECT s FROM Survey s WHERE s.category = :category and s.complete = TRUE and s.active = TRUE", [category: singleCategory])
+            def publishedSurveys = Survey.executeQuery(
+                    "SELECT s FROM Survey s WHERE s.category = :category and s.complete = TRUE and s.active = TRUE", [category: singleCategory])
             surveys.add([
                     category: singleCategory,
                     surveys: publishedSurveys,
@@ -72,13 +74,13 @@ class SurveyUtils {
         return surveys
     }
 
-    public static getAllSurveyCategories() {
-        println "getAllSurveyCategories in SurveyUtils"
+    public static getAllSurveyCategories()
+    {
         Survey.constraints.category.inList
     }
 
-    public static getAllQuestionTypes() {
-        println "getAllQuestionTypes in SurveyUtils"
+    public static getAllQuestionTypes()
+    {
         Question.constraints.type.inList
     }
 }

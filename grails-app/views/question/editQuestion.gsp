@@ -5,11 +5,6 @@
 </head>
 <body>
 <g:javascript src="application.js"/>
-<script>
-    $(window).load(function() {
-        optionsCnt = ${questionInstance?.options.size()};
-    });
-</script>
 <div data-role="page" id="editQuestionPage">
     <div data-theme="a" data-role="header">
         <h3>
