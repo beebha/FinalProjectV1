@@ -1,7 +1,5 @@
 package edu.harvard.cscie56.finalproject
 
-import edu.harvard.cscie56.finalproject.Question
-import edu.harvard.cscie56.finalproject.Survey
 import edu.harvard.cscie56.finalproject.auth.User
 
 class SurveyUtils {
@@ -12,8 +10,8 @@ class SurveyUtils {
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def publishedSurveysOfLoggedInUser = Survey.executeQuery(
-                    "SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = TRUE", [user: user, category: singleCategory])
+            def publishedSurveysOfLoggedInUser = Survey.findAllByUserAndCategoryAndCompleteAndActive(user, singleCategory, true, true)
+
             surveys.add([
                     category: singleCategory,
                     surveys: publishedSurveysOfLoggedInUser,
@@ -29,8 +27,7 @@ class SurveyUtils {
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def completedSurveysOfLoggedInUser = Survey.executeQuery(
-                    "SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = TRUE and s.active = FALSE", [user: user, category: singleCategory])
+            def completedSurveysOfLoggedInUser = Survey.findAllByUserAndCategoryAndCompleteAndActive(user, singleCategory, true, false)
             surveys.add([
                     category: singleCategory,
                     surveys: completedSurveysOfLoggedInUser,
@@ -46,8 +43,8 @@ class SurveyUtils {
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def incompleteSurveysOfLoggedInUser = Survey.executeQuery(
-                    "SELECT s FROM Survey s WHERE s.user = :user and s.category = :category and s.complete = FALSE and s.active = FALSE", [user: user, category: singleCategory])
+            def incompleteSurveysOfLoggedInUser = Survey.findAllByUserAndCategoryAndCompleteAndActive(user, singleCategory, false, false)
+
             surveys.add([
                     category: singleCategory,
                     surveys: incompleteSurveysOfLoggedInUser,
@@ -63,8 +60,8 @@ class SurveyUtils {
         // get all survey categories and number of surveys in each list
         for(singleCategory in Survey.constraints.category.inList) {
 
-            def publishedSurveys = Survey.executeQuery(
-                    "SELECT s FROM Survey s WHERE s.category = :category and s.complete = TRUE and s.active = TRUE", [category: singleCategory])
+            def publishedSurveys = Survey.findAllByCategoryAndCompleteAndActive(singleCategory, true, true)
+
             surveys.add([
                     category: singleCategory,
                     surveys: publishedSurveys,

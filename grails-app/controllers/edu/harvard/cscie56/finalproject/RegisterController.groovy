@@ -18,7 +18,7 @@ class RegisterController {
 
     def save()
     {
-        def userRole = Role.findByAuthority("ROLE_USER")?: new Role(authority:"ROLE_USER").save(failOnError:true)
+        def userRole = Role.findOrSaveByAuthority("ROLE_USER")
 
         def userInstance = new User(
                 username: params.username,

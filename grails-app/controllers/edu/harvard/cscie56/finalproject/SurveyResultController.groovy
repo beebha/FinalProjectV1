@@ -1,7 +1,7 @@
 package edu.harvard.cscie56.finalproject
 
-import org.springframework.dao.DataIntegrityViolationException
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.dao.DataIntegrityViolationException
 
 @Secured('isAuthenticated()')
 class SurveyResultController {

@@ -1,8 +1,8 @@
 package edu.harvard.cscie56.finalproject
 
 import grails.converters.JSON
-import org.springframework.dao.DataIntegrityViolationException
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.dao.DataIntegrityViolationException
 
 @Secured('isAuthenticated()')
 class QuestionController {
@@ -48,12 +48,12 @@ class QuestionController {
 
     def saveQn()
     {
-        def surveyID = Long.valueOf(params.get("surveyID").toString())
-        def questionID = Long.valueOf(params.get("questionID").toString())
-        def surveyState = params.get("surveyState")
+        def surveyID = Long.valueOf(params.surveyID.toString())
+        def questionID = Long.valueOf(params.questionID.toString())
+        def surveyState = params.surveyState
 
-        def qnText = params.get("questionText")
-        def qnType = params.get("type")
+        def qnText = params.questionText
+        def qnType = params.type
         def additionalComments = false
 
         def options = []
@@ -64,12 +64,12 @@ class QuestionController {
         // get required question attributes
         if(qnType != "Comment")
         {
-            additionalComments = params.get("comment") == "on" ? true : false
+            additionalComments = params.comment == "on" ? true : false
 
             if(qnType == "Numerical Slider Scale" || qnType == "Discrete Rating Scale") {
-                scale = Integer.valueOf(params.get("scale").toString())
-                startLabel = params.get("scaleStartLbl")
-                endLabel = params.get("scaleEndLbl")
+                scale = Integer.valueOf(params.scale.toString())
+                startLabel = params.scaleStartLbl
+                endLabel = params.scaleEndLbl
             } else {
                 int totalOptions = 1;
                 while(params.get("option"+totalOptions) != null) {

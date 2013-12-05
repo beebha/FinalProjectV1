@@ -16,8 +16,6 @@ class Survey {
     static constraints = {
         name blank: false, unique: true
         category blank: false, inList: ["Customer", "Education", "Entertainment", "Employment", "Marketing", "Medical", "Technology", "Other"]
-        complete nullable: false
-        active nullable: false
     }
 
     static mapping = {

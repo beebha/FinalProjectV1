@@ -1,11 +1,7 @@
 package edu.harvard.cscie56.finalproject
 
-import edu.harvard.cscie56.finalproject.Survey
-import edu.harvard.cscie56.finalproject.SurveyResult
 import edu.harvard.cscie56.finalproject.auth.User
-import org.springframework.transaction.annotation.Transactional
 
-@Transactional
 class SurveyResultService {
 
     SurveyResult saveSurveyResult(String surveyName, Long userId, Long surveyId)

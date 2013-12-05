@@ -1,10 +1,5 @@
 package edu.harvard.cscie56.finalproject
 
-import edu.harvard.cscie56.finalproject.Answer
-import edu.harvard.cscie56.finalproject.SurveyResult
-import org.springframework.transaction.annotation.Transactional
-
-@Transactional
 class AnswerService {
 
     Answer saveAnswer(Long surveyResultId) {

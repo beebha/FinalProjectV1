@@ -1,9 +1,9 @@
 package edu.harvard.cscie56.finalproject
 
-import grails.converters.JSON
 import edu.harvard.cscie56.finalproject.auth.User
-import org.springframework.dao.DataIntegrityViolationException
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.dao.DataIntegrityViolationException
 
 @Secured('isAuthenticated()')
 class SurveyController {
@@ -23,7 +23,7 @@ class SurveyController {
     def saveSurveyStep1()
     {
         User user = User.load(springSecurityService.principal.id)
-        def surveyInstance = surveyService.saveSurvey(params.get("name"), params.get("category"), false, false, user)
+        def surveyInstance = surveyService.saveSurvey(params.name, params.category, false, false, user)
 
         if (surveyInstance.hasErrors()) {
             render(view: "surveyStep1", model: [surveyInstance: surveyInstance, categories: SurveyUtils.getAllSurveyCategories()])
@@ -34,11 +34,11 @@ class SurveyController {
 
     def saveSurveyStep2()
     {
-        def surveyID = Long.valueOf(params.get("surveyID").toString())
+        def surveyID = Long.valueOf(params.surveyID.toString())
 
-        def btnAction = params.get("submitBtnClicked")
-        def qnText = params.get("questionText")
-        def qnType = params.get("type")
+        def btnAction = params.submitBtnClicked
+        def qnText = params.questionText
+        def qnType = params.type
         def additionalComments = false
 
         def options = []
@@ -49,12 +49,12 @@ class SurveyController {
         // get required question attributes
         if(qnType != "Comment")
         {
-            additionalComments = params.get("comment") == "on" ? true : false
+            additionalComments = params.comment == "on" ? true : false
 
             if(qnType == "Numerical Slider Scale" || qnType == "Discrete Rating Scale") {
-                scale = Integer.valueOf(params.get("scale").toString())
-                startLabel = params.get("scaleStartLbl")
-                endLabel = params.get("scaleEndLbl")
+                scale = Integer.valueOf(params.scale.toString())
+                startLabel = params.scaleStartLbl
+                endLabel = params.scaleEndLbl
             } else {
                 int totalOptions = 1;
                 while(params.get("option"+totalOptions) != null) {
@@ -117,7 +117,7 @@ class SurveyController {
     {
         def surveyInstance = Survey.get(surveyID)
 
-        if(params.get("deactivate") != null) {
+        if(params.deactivate != null) {
             // check to see if survey has results
             if(surveyInstance.surveyResults.size() > 0) {
                 flash.message = "Survey has results and cannot be deactivated"
@@ -132,26 +132,26 @@ class SurveyController {
             }
         }
 
-        if (params.get("saveadd") != null ||
-                params.get("savepublish") != null ||
-                params.get("savecontinue") != null ||
-                params.get("savecomplete") != null) {
+        if (params.saveadd != null ||
+                params.savepublish != null ||
+                params.savecontinue != null ||
+                params.savecomplete != null) {
 
-            surveyInstance.name = params.get("name")
-            surveyInstance.category = params.get("category")
+            surveyInstance.name = params.name
+            surveyInstance.category = params.category
 
             surveyInstance.save(flush: true)
 
-            if(params.get("saveadd") != null) {
+            if(params.saveadd != null) {
                 showSurveyStep2(surveyID)
-            } else if (params.get("savepublish") != null) {
+            } else if (params.savepublish != null) {
                 surveyInstance.active = true
                 surveyInstance.save(flush: true)
                 viewSurvey('active', surveyID)
                 return
-            } else if (params.get("savecontinue") != null) {
+            } else if (params.savecontinue != null) {
                 showHome()
-            } else if (params.get("savecomplete") != null) {
+            } else if (params.savecomplete != null) {
                 surveyInstance.complete = true
                 surveyInstance.save(flush: true)
                 viewSurvey('complete', surveyID)

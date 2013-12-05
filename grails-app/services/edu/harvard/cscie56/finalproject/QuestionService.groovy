@@ -1,10 +1,5 @@
 package edu.harvard.cscie56.finalproject
 
-import edu.harvard.cscie56.finalproject.Question
-import edu.harvard.cscie56.finalproject.Survey
-import org.springframework.transaction.annotation.Transactional
-
-@Transactional
 class QuestionService {
 
     Question saveQuestion(String questionText, String type, Integer scale,
