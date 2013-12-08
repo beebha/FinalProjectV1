@@ -13,6 +13,9 @@
     </div>
     <div data-role="content">
         <h2>${title}</h2>
+        <g:if test="${flash.message}">
+            <div class="errorMsg">${flash.message}</div>
+        </g:if>
         <g:if test="${title == 'My Surveys'}">
         <div data-role="collapsible-set" data-theme="b" data-mini="true" data-content-theme="d" data-inset="false">
             <div data-role="collapsible">

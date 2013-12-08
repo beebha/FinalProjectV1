@@ -1,5 +1,6 @@
 package edu.harvard.cscie56.finalproject
 
+import edu.harvard.cscie56.finalproject.auth.User
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
@@ -7,105 +8,58 @@ import org.springframework.dao.DataIntegrityViolationException
 class SurveyResultController {
 
     def surveyResultService
+    def springSecurityService
+    def answerService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def index() {
-        redirect(action: "list", params: params)
-    }
 
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [surveyResultInstanceList: SurveyResult.list(params), surveyResultInstanceTotal: SurveyResult.count()]
-    }
+    def saveSurveyResults()
+    {
+        println "saveSurveyResults"
 
-    def create() {
-        [surveyResultInstance: new SurveyResult(params)]
-    }
+        User resultsUser = User.load(springSecurityService.principal.id)
+        def surveyID = Long.valueOf(params.surveyID.toString())
 
-    def save() {
+        def surveyResultInstance = surveyResultService.saveSurveyResult(resultsUser, surveyID)
 
-        def userId = params.get('user').id
-        def surveyId = params.get('survey').id
-        def surveyResultInstance = surveyResultService.saveSurveyResult(params.get('name'), userId.toLong(), surveyId.toLong())
+        def allParams = params.entrySet()
 
-        if (surveyResultInstance.hasErrors()) {
-            render(view: "create", model: [surveyResultInstance: surveyResultInstance])
-            return
-        }
+        allParams.each {
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'surveyResult.label', default: 'SurveyResult'), surveyResultInstance.id])
-        redirect(action: "show", id: surveyResultInstance.id)
-    }
+            def key = it.key.toString()
 
-    def show(Long id) {
-        def surveyResultInstance = SurveyResult.get(id)
-        if (!surveyResultInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'surveyResult.label', default: 'SurveyResult'), id])
-            redirect(action: "list")
-            return
-        }
+            if(key.indexOf("qn") != -1) {
+                def qnID = Long.valueOf(key.replaceAll("qn", ""))
+                def qnInstance = Question.get(qnID)
+                def value = it.value
+                def answers = []
+                def additionalComments = ""
 
-        [surveyResultInstance: surveyResultInstance]
-    }
 
-    def edit(Long id) {
-        def surveyResultInstance = SurveyResult.get(id)
-        if (!surveyResultInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'surveyResult.label', default: 'SurveyResult'), id])
-            redirect(action: "list")
-            return
-        }
+                if(qnInstance.type == "Comment" ||
+                        qnInstance.type == "Discrete Rating Scale" ||
+                        qnInstance.type == "Multiple Choice (One Answer)" ||
+                        qnInstance.type == "Numerical Slider Scale") {
+                    answers.add(value.toString())
 
-        [surveyResultInstance: surveyResultInstance]
-    }
 
-    def update(SurveyResult cmd, Long id, Long version) {
 
-        if (!cmd.validate()) {
-            render(view: "edit", model: [surveyResultInstance: cmd])
-            return
-        }
+                } else if (qnInstance.type == "Multiple Choice (Multiple Answers)" ||
+                        qnInstance.type == "Ranking") {
+                    answers = value as List
+                }
 
-        def surveyResultInstance = SurveyResult.get(id)
-        if (!surveyResultInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'surveyResult.label', default: 'SurveyResult'), id])
-            redirect(action: "list")
-            return
-        }
+                if(qnInstance.type != "Comment") {
+                    additionalComments = params.get("additionalCommentsQn"+qnID)
+                }
 
-        if (version != null) {
-            if (surveyResultInstance.version > version) {
-                surveyResultInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'surveyResult.label', default: 'SurveyResult')] as Object[],
-                        "Another user has updated this SurveyResult while you were editing")
-                render(view: "edit", model: [surveyResultInstance: surveyResultInstance])
-                return
+                // save Answer
+                answerService.saveAnswer(answers, additionalComments, surveyResultInstance.id)
             }
         }
 
-        surveyResultService.updateSurveyResult(surveyResultInstance, cmd)
-
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'surveyResult.label', default: 'SurveyResult'), surveyResultInstance.id])
-        redirect(action: "show", id: surveyResultInstance.id)
-    }
-
-    def delete(Long id) {
-        def surveyResultInstance = SurveyResult.get(id)
-        if (!surveyResultInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'surveyResult.label', default: 'SurveyResult'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            surveyResultService.deleteSurveyResult(surveyResultInstance)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'surveyResult.label', default: 'SurveyResult'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'surveyResult.label', default: 'SurveyResult'), id])
-            redirect(action: "show", id: id)
-        }
+        // send to all surveys page with thank you message
+        redirect(controller: "home", action: "allsurveyindex", params: [message: "Thank you for taking the Survey!"])
     }
 }

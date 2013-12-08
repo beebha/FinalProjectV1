@@ -16,7 +16,7 @@
         <g:if test="${flash.message}">
             <div class="errorMsg">${flash.message}</div>
         </g:if>
-        <g:form controller="survey" action="saveSurveyResults">
+        <g:form controller="surveyResult" action="saveSurveyResults">
         <g:hiddenField name="surveyID" value="${surveyInstance?.id}"/>
         <h3>${surveyInstance?.name} - (${surveyInstance?.category})</h3>
         <g:set var="currentQnCnt" value="${1}"/>
@@ -41,7 +41,7 @@
                                 </legend>
                                 <g:set var="optionCntOne" value="${1}"/>
                                 <g:each in='${singleQn?.options}' var='singleOption'>
-                                    <input id="qn${currentQnCnt}Radio${optionCntOne}" name="qn${singleQn?.id}" data-theme="c" type="radio" required>
+                                    <input id="qn${currentQnCnt}Radio${optionCntOne}" name="qn${singleQn?.id}" value="${singleOption}" data-theme="c" type="radio" required>
                                     <label for="qn${currentQnCnt}Radio${optionCntOne}">
                                         ${singleOption}
                                     </label>
@@ -58,7 +58,7 @@
                                 </legend>
                                 <g:set var="optionCntMultiple" value="${1}"/>
                                 <g:each in='${singleQn?.options}' var='singleOption'>
-                                    <input id="qn${currentQnCnt}Checkbox${optionCntMultiple}" name="qn${singleQn?.id}" data-theme="c" type="checkbox">
+                                    <input id="qn${currentQnCnt}Checkbox${optionCntMultiple}" name="qn${singleQn?.id}" value="${singleOption}" data-theme="c" type="checkbox">
                                     <label for="qn${currentQnCnt}Checkbox${optionCntMultiple}">
                                         ${singleOption}
                                     </label>
@@ -129,7 +129,7 @@
                             <label for="qn${currentQnCnt}AdditionalComments">
                                 Comments
                             </label>
-                            <textarea name="qn${singleQn?.id}AdditionalComments" id="qn${currentQnCnt}AdditionalComments"></textarea>
+                            <textarea name="additionalCommentsQn${singleQn?.id}" id="qn${currentQnCnt}AdditionalComments"></textarea>
                         </div>
                     </g:if>
                     <br>

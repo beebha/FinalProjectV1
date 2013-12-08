@@ -160,20 +160,6 @@ class SurveyController {
         }
     }
 
-    def saveSurveyResults(Long surveyID)
-    {
-        println "saveSurveyResults"
-        def es=params.entrySet()
-        es.each{
-            println "Key is " + it.key
-            println "Value is " + it.value
-        }
-
-        User user = User.load(springSecurityService.principal.id)
-
-
-    }
-
     def delete(Long id) {
         def surveyInstance = Survey.get(id)
         if (!surveyInstance) {

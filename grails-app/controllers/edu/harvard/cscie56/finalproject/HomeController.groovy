@@ -37,7 +37,11 @@ class HomeController {
 
     def allsurveyindex()
     {
-        flash.clear()
+        if (params.message != null) {
+            flash.message = params.message
+        } else {
+            flash.clear()
+        }
 
         def categoriesAndCounts = SurveyUtils.getAllSurveyCategoriesAndCount()
 
