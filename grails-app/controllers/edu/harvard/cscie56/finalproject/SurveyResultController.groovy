@@ -18,10 +18,19 @@ class SurveyResultController {
     {
         println "saveSurveyResults"
 
-        User resultsUser = User.load(springSecurityService.principal.id)
+        User surveyTaker = User.load(springSecurityService.principal.id)
         def surveyID = Long.valueOf(params.surveyID.toString())
 
-        def surveyResultInstance = surveyResultService.saveSurveyResult(resultsUser, surveyID)
+        def surveyResultInstance = surveyResultService.saveSurveyResult(surveyTaker, surveyID)
+
+        if (surveyResultInstance.hasErrors()) {
+
+            println "errors!!!!!"
+            println surveyResultInstance.errors
+            return
+        }
+
+        println "no errors with saving survey result"
 
         def allParams = params.entrySet()
 
@@ -43,8 +52,6 @@ class SurveyResultController {
                         qnInstance.type == "Numerical Slider Scale") {
                     answers.add(value.toString())
 
-
-
                 } else if (qnInstance.type == "Multiple Choice (Multiple Answers)" ||
                         qnInstance.type == "Ranking") {
                     answers = value as List
@@ -55,11 +62,24 @@ class SurveyResultController {
                 }
 
                 // save Answer
-                answerService.saveAnswer(answers, additionalComments, surveyResultInstance.id)
+                answerService.saveAnswer(answers, additionalComments, qnInstance, surveyResultInstance)
             }
         }
 
+        println "After saving all answers : " + surveyResultInstance.answers.size()
+
         // send to all surveys page with thank you message
         redirect(controller: "home", action: "allsurveyindex", params: [message: "Thank you for taking the Survey!"])
+    }
+
+    def showSurveyResults(Long surveyResultID)
+    {
+        println "showSurveyResults"
+
+        def surveyResultInstance = SurveyResult.get(surveyResultID)
+
+        println surveyResultInstance.answers.size()
+
+        render(view: "showSurveyResult", model: [surveyResultInstance: surveyResultInstance])
     }
 }

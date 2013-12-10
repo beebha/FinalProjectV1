@@ -105,6 +105,29 @@
                 </g:each>
             </ul>
         </g:if>
+        <g:if test="${title == 'All Results'}">
+            <ul data-role="listview" data-mini="true" data-divider-theme="b" data-inset="true">
+                <li data-role="list-divider" role="heading">
+                    ${title}
+                </li>
+                <g:each in='${allResultsCategoriesAndCounts}' var='resultCategoryInfo'>
+                    <li data-theme="c">
+                        <div>${resultCategoryInfo.category}</div><div class="ui-li-count">${resultCategoryInfo.count}</div>
+                        <g:if test="${resultCategoryInfo.count > 0}">
+                            <ul>
+                                <g:each in='${resultCategoryInfo?.surveyResults}' var='resultSurvey'>
+                                    <li>
+                                        <g:link controller="surveyResult" action="showSurveyResults" params="[surveyResultID: resultSurvey?.id]">
+                                            ${resultSurvey?.surveyTaker.username} - <g:formatDate date="${resultSurvey?.dateCreated}" formatName="default.date.format"/>
+                                        </g:link>
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </g:if>
+                    </li>
+                </g:each>
+            </ul>
+        </g:if>
         <br>
         <center>
             <g:if test="${title == 'My Surveys'}">

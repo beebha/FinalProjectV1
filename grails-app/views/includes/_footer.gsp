@@ -3,7 +3,7 @@
         <ul>
             <li><a id="mysurveys" href="../home/mysurveyindex" data-icon="home">My Surveys</a></li>
             <li><a id="allsurveys" href="../home/allsurveyindex" data-icon="home">All Surveys</a></li>
-            <li><a id="results" href="#" data-icon="grid">Results</a></li>
+            <li><a id="results" href="../home/allresults" data-icon="grid">Results</a></li>
         </ul>
     </div>
 </div>

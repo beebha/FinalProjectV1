@@ -7,7 +7,7 @@ class SurveyUtils {
     public static getMyActiveSurveyCategoriesAndCount(User user)
     {
         def surveys = []
-        // get all survey categories and number of surveys in each list
+
         for(singleCategory in Survey.constraints.category.inList) {
 
             def publishedSurveysOfLoggedInUser = Survey.findAllByUserAndCategoryAndCompleteAndActive(user, singleCategory, true, true)
@@ -24,7 +24,7 @@ class SurveyUtils {
     public static getMyCompletedSurveyCategoriesAndCount(User user)
     {
         def surveys = []
-        // get all survey categories and number of surveys in each list
+
         for(singleCategory in Survey.constraints.category.inList) {
 
             def completedSurveysOfLoggedInUser = Survey.findAllByUserAndCategoryAndCompleteAndActive(user, singleCategory, true, false)
@@ -40,7 +40,7 @@ class SurveyUtils {
     public static getMyIncompleteSurveyCategoriesAndCount(User user)
     {
         def surveys = []
-        // get all survey categories and number of surveys in each list
+
         for(singleCategory in Survey.constraints.category.inList) {
 
             def incompleteSurveysOfLoggedInUser = Survey.findAllByUserAndCategoryAndCompleteAndActive(user, singleCategory, false, false)
@@ -57,7 +57,7 @@ class SurveyUtils {
     public static getAllSurveyCategoriesAndCount()
     {
         def surveys = []
-        // get all survey categories and number of surveys in each list
+
         for(singleCategory in Survey.constraints.category.inList) {
 
             def publishedSurveys = Survey.findAllByCategoryAndCompleteAndActive(singleCategory, true, true)
@@ -69,6 +69,23 @@ class SurveyUtils {
             ])
         }
         return surveys
+    }
+
+    public static getAllSurveyResultsCategoriesAndCountByCreator(User user)
+    {
+        def allSurveyResults = []
+
+        for(singleCategory in Survey.constraints.category.inList) {
+
+            def surveyResults = SurveyResult.findAllBySurveyCreatorAndCategory(user, singleCategory)
+
+            allSurveyResults.add([
+                    category: singleCategory,
+                    surveyResults: surveyResults,
+                    count: surveyResults.size()
+            ])
+        }
+        return allSurveyResults
     }
 
     public static getAllSurveyCategories()

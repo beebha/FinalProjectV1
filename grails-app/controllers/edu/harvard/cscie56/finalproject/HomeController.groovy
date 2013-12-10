@@ -47,4 +47,15 @@ class HomeController {
 
         render (view: 'home', model: [title: 'All Surveys', categoriesAndCounts: categoriesAndCounts])
     }
+
+    def allresults()
+    {
+        flash.clear()
+
+        User user = User.load(springSecurityService.principal.id)
+
+        def allResultsCategoriesAndCounts = SurveyUtils.getAllSurveyResultsCategoriesAndCountByCreator(user)
+
+        render (view: 'home', model: [title: 'All Results', allResultsCategoriesAndCounts: allResultsCategoriesAndCounts])
+    }
 }

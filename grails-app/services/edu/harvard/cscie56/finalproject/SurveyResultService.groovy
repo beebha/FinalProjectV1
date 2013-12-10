@@ -4,10 +4,16 @@ import edu.harvard.cscie56.finalproject.auth.User
 
 class SurveyResultService {
 
-    SurveyResult saveSurveyResult(User resultsUser, Long surveyId)
+    SurveyResult saveSurveyResult(User surveyTaker, Long surveyId)
     {
+        println "saving initial survey result"
         def survey = Survey.get(surveyId)
-        def surveyResultInstance = new SurveyResult([resultsUser: resultsUser, surveyId: surveyId, survey: survey])
+        def surveyResultInstance = new SurveyResult([
+                surveyTaker: surveyTaker,
+                surveyCreator: survey.user,
+                category: survey.category,
+                surveyId: surveyId,
+                survey: survey])
         surveyResultInstance.save(flush: true)
         return surveyResultInstance
     }

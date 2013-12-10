@@ -4,11 +4,20 @@ import edu.harvard.cscie56.finalproject.auth.User
 
 class SurveyResult {
 
-    User resultsUser
+    User surveyTaker
+    User surveyCreator
     Date dateCreated
-    Survey survey
+    String category
 
     static hasMany = [answers: Answer]
 
     static belongsTo = [survey: Survey]
+
+    static constraints = {
+        category inList: ["Customer", "Education", "Entertainment", "Employment", "Marketing", "Medical", "Technology", "Other"]
+    }
+
+    static mapping = {
+        answers sort: 'question.id', order: 'asc'
+    }
 }
