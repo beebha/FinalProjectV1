@@ -11,7 +11,7 @@ class Survey {
     User user
     Date dateCreated
 
-    static hasMany = [questions: Question, surveyResults: SurveyResult]
+    static hasMany = [questions: Question]
 
     static constraints = {
         name blank: false, unique: true

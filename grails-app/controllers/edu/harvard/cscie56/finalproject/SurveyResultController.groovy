@@ -16,21 +16,10 @@ class SurveyResultController {
 
     def saveSurveyResults()
     {
-        println "saveSurveyResults"
-
         User surveyTaker = User.load(springSecurityService.principal.id)
         def surveyID = Long.valueOf(params.surveyID.toString())
 
         def surveyResultInstance = surveyResultService.saveSurveyResult(surveyTaker, surveyID)
-
-        if (surveyResultInstance.hasErrors()) {
-
-            println "errors!!!!!"
-            println surveyResultInstance.errors
-            return
-        }
-
-        println "no errors with saving survey result"
 
         def allParams = params.entrySet()
 
@@ -44,7 +33,6 @@ class SurveyResultController {
                 def value = it.value
                 def answers = []
                 def additionalComments = ""
-
 
                 if(qnInstance.type == "Comment" ||
                         qnInstance.type == "Discrete Rating Scale" ||
@@ -66,8 +54,6 @@ class SurveyResultController {
             }
         }
 
-        println "After saving all answers : " + surveyResultInstance.answers.size()
-
         // send to all surveys page with thank you message
         redirect(controller: "home", action: "allsurveyindex", params: [message: "Thank you for taking the Survey!"])
     }
@@ -78,7 +64,13 @@ class SurveyResultController {
 
         def surveyResultInstance = SurveyResult.get(surveyResultID)
 
-        println surveyResultInstance.answers.size()
+        println "Survey Result ID : " + surveyResultInstance.id
+
+        println "Survey Result Category : " + surveyResultInstance.category
+
+        println "Survey Name : " + surveyResultInstance.survey.name
+
+        println "No. of answers : " + surveyResultInstance.answers.size()
 
         render(view: "showSurveyResult", model: [surveyResultInstance: surveyResultInstance])
     }

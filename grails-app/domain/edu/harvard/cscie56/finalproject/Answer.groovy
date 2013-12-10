@@ -1,10 +1,15 @@
 package edu.harvard.cscie56.finalproject
 
 class Answer {
+    Question question
     List allAnswers
     String additonalComments
 
-    static belongsTo = [surveyResult: SurveyResult, question: Question]
+    static belongsTo = [surveyResult: SurveyResult]
 
     static hasMany = [allAnswers: String]
+
+    static constraints = {
+        additonalComments nullable: true
+    }
 }

@@ -8,10 +8,9 @@ class SurveyResult {
     User surveyCreator
     Date dateCreated
     String category
+    Survey survey
 
     static hasMany = [answers: Answer]
-
-    static belongsTo = [survey: Survey]
 
     static constraints = {
         category inList: ["Customer", "Education", "Entertainment", "Employment", "Marketing", "Medical", "Technology", "Other"]

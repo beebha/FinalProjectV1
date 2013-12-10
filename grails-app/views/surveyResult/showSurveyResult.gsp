@@ -25,7 +25,7 @@
                             <label for="qn${singleAns?.id}">
                                 Comments
                             </label>
-                            <textarea name="qn${singleAns?.id}" id="qn${singleAns?.id}" readonly>${singleAns?.answers.get(0)}</textarea>
+                            <textarea name="qn${singleAns?.id}" id="qn${singleAns?.id}" readonly>${singleAns?.allAnswers.get(0)}</textarea>
                         </div>
                     </g:if>
                     <g:if test="${singleQn?.type == 'Multiple Choice (One Answer)'}">

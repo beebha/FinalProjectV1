@@ -35,7 +35,6 @@ class ForgotController {
         userInstance.save(flush: true)
 
         if (userInstance.hasErrors()) {
-            println "reset hasErrors"
             render(view: "forgot", model: [forgotInstance: userInstance])
             return
         }
