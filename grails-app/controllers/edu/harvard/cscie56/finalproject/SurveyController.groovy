@@ -119,7 +119,7 @@ class SurveyController {
 
         if(params.deactivate != null) {
             // check to see if survey has results
-            if(surveyInstance.surveyResults.size() > 0) {
+            if(SurveyResult.findAllBySurvey(surveyInstance).size() > 0) {
                 flash.message = "Survey has results and cannot be deactivated"
                 viewSurvey('active', surveyID)
                 return
@@ -168,7 +168,7 @@ class SurveyController {
             return
         }
 
-        if(surveyInstance.surveyResults.size() > 0) {
+        if(SurveyResult.findAllBySurvey(surveyInstance).size() > 0) {
             surveyInstance.errors.rejectValue("version", "default.not.deleted.surveyresults.message",
                     [message(code: 'survey.label', default: 'Survey')] as Object[],
                     "This Survey has results and cannot be deleted.")

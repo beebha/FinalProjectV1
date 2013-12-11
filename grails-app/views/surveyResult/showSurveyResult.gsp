@@ -13,7 +13,7 @@
     </div>
     <div data-role="content">
         <h2>Survey Results</h2>
-        <h3>${surveyResultInstance?.surveyTaker.username} - <g:formatDate date="${surveyResultInstance?.dateCreated}" formatName="default.date.format"/></h3>
+        <h3>Taken by <em>${surveyResultInstance?.surveyTaker.username}</em> (<g:formatDate date="${surveyResultInstance?.dateCreated}" formatName="default.date.format"/>)</h3>
         <g:set var="currentQnCnt" value="${1}"/>
         <g:each in='${surveyResultInstance?.answers}' var='singleAns'>
             <div id="question${currentQnCnt}">
@@ -28,7 +28,7 @@
                             <textarea name="qn${singleAns?.id}" id="qn${singleAns?.id}" readonly>${singleAns?.allAnswers.get(0)}</textarea>
                         </div>
                     </g:if>
-                    <g:if test="${singleQn?.type == 'Multiple Choice (One Answer)'}">
+                    <g:if test="${singleAns?.question.type == 'Multiple Choice (One Answer)'}">
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
                                 <legend>
@@ -45,7 +45,7 @@
                             </fieldset>
                         </div>
                     </g:if>
-                    <g:if test="${singleQn?.type == 'Multiple Choice (Multiple Answers)'}">
+                    <g:if test="${singleAns?.question.type == 'Multiple Choice (Multiple Answers)'}">
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup" data-type="vertical" data-mini="true" required>
                                 <legend>
@@ -62,7 +62,7 @@
                             </fieldset>
                         </div>
                     </g:if>
-                    <g:if test="${singleQn?.type == 'Numerical Slider Scale'}">
+                    <g:if test="${singleAns?.question.type == 'Numerical Slider Scale'}">
                         <div data-role="fieldcontain">
                             <label for="qn${currentQnCnt}Slider">
                                 Choose
@@ -74,7 +74,7 @@
                             <span class="ui-slider-inner-label" style="position: absolute; right:2%; top:30px; text-shadow:none; color:black; font-weight:normal">${singleQn?.endLabel}</span>
                         </div>
                     </g:if>
-                    <g:if test="${singleQn?.type == 'Ranking'}">
+                    <g:if test="${singleAns?.question.type == 'Ranking'}">
                         <div data-role="fieldcontain">
                             <label for="qn${currentQnCnt}Rank">
                                 Rank
@@ -98,7 +98,7 @@
                             </ul>
                         </div>
                     </g:if>
-                    <g:if test="${singleQn?.type == 'Discrete Rating Scale'}">
+                    <g:if test="${singleAns?.question.type == 'Discrete Rating Scale'}">
                         <div data-role="fieldcontain">
                             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                                 <legend>
@@ -119,7 +119,7 @@
                             </fieldset>
                         </div>
                     </g:if>
-                    <g:if test="${singleQn?.overallComment == true}">
+                    <g:if test="${singleAns?.question.overallComment == true}">
                         <div data-role="fieldcontain">
                             <label for="qn${currentQnCnt}AdditionalComments">
                                 Comments
