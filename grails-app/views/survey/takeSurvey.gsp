@@ -110,7 +110,7 @@
                                     Choose
                                 </legend>
                                 <g:each in="${1..singleQn?.scale}">
-                                    <input id="qn${currentQnCnt}RadioH${it}" name="qn${singleQn?.id}" data-theme="c" type="radio" required>
+                                    <input id="qn${currentQnCnt}RadioH${it}" name="qn${singleQn?.id}" value="${it}" data-theme="c" type="radio" required>
                                     <label for="qn${currentQnCnt}RadioH${it}">
                                         <g:if test="${it == 1}">
                                             ${singleQn?.startLabel}

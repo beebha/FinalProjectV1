@@ -36,7 +36,9 @@
                                 </legend>
                                 <g:set var="optionCntOne" value="${1}"/>
                                 <g:each in='${singleAns?.question.options}' var='singleOption'>
-                                    <input id="qn${currentQnCnt}Radio${optionCntOne}" name="qn${singleAns?.question.id}" value="${singleOption}" data-theme="c" type="radio" required>
+                                    <input id="qn${currentQnCnt}Radio${optionCntOne}" name="qn${singleAns?.question.id}"
+                                            <g:if test="${singleAns?.allAnswers.get(0) == singleOption}">checked</g:if>
+                                           data-theme="c" type="radio" disabled>
                                     <label for="qn${currentQnCnt}Radio${optionCntOne}">
                                         ${singleOption}
                                     </label>
@@ -53,7 +55,9 @@
                                 </legend>
                                 <g:set var="optionCntMultiple" value="${1}"/>
                                 <g:each in='${singleAns?.question.options}' var='singleOption'>
-                                    <input id="qn${currentQnCnt}Checkbox${optionCntMultiple}" name="qn${singleAns?.question.id}" value="${singleOption}" data-theme="c" type="checkbox">
+                                    <input id="qn${currentQnCnt}Checkbox${optionCntMultiple}" name="qn${singleAns?.question.id}"
+                                           <g:if test="${singleAns?.allAnswers.contains(singleOption)}">checked</g:if>
+                                           data-theme="c" type="checkbox" disabled>
                                     <label for="qn${currentQnCnt}Checkbox${optionCntMultiple}">
                                         ${singleOption}
                                     </label>
@@ -69,8 +73,8 @@
                             </label>
                             <span class="ui-slider-inner-label" style="position: absolute; left:31%; top:30px; text-shadow:none; color:black; font-weight:normal">${singleAns?.question.startLabel}</span>
                             <input id="qn${currentQnCnt}Slider" name="qn${singleAns?.question.id}"
-                                   type="range" value="${singleAns?.question.scale}" min="0" max="${singleAns?.question.scale}"
-                                   data-highlight="true" data-mini="true" required>
+                                   type="range" value="${singleAns?.allAnswers.get(0)}" min="0" max="${singleAns?.question.scale}"
+                                   data-highlight="true" data-mini="true" disabled>
                             <span class="ui-slider-inner-label" style="position: absolute; right:2%; top:30px; text-shadow:none; color:black; font-weight:normal">${singleAns?.question.endLabel}</span>
                         </div>
                     </g:if>
@@ -85,10 +89,9 @@
                                     <li data-role="fieldcontain">
                                         <select data-mini="true" data-inline="true"
                                                 id="qn${currentQnCnt}RankSelect${optionCntRank}"
-                                                name="qn${singleAns?.question.id}"
-                                                onchange="setRatingValues('qn${currentQnCnt}RankSelect${optionCntRank}', '${singleAns?.question.options.size()}')">
+                                                name="qn${singleAns?.question.id}" disabled>
                                             <g:each in="${1..singleAns?.question.options.size()}">
-                                                <option value="${it}">${it}</option>
+                                                <option value="${it}" <g:if test="${singleAns?.allAnswers.get(optionCntRank-1) == it+""}">selected</g:if>>${it}</option>
                                             </g:each>
                                         </select>
                                         ${singleOption}
@@ -105,15 +108,17 @@
                                     Choose
                                 </legend>
                                 <g:each in="${1..singleAns?.question.scale}">
-                                    <input id="qn${currentQnCnt}RadioH${it}" name="qn${singleAns?.question.id}" data-theme="c" type="radio" required>
+                                    <input id="qn${currentQnCnt}RadioH${it}" name="qn${singleAns?.question.id}"
+                                           <g:if test="${singleAns?.allAnswers.get(0) == it+""}">checked</g:if>
+                                           data-theme="c" type="radio" disabled>
                                     <label for="qn${currentQnCnt}RadioH${it}">
                                         <g:if test="${it == 1}">
-                                            ${singleAns?.question.startLabel}
+                                            ${singleAns?.question.startLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </g:if>
+                                        ${it}
                                         <g:if test="${it == singleAns?.question.scale}">
-                                            ${singleAns?.question.endLabel}
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${singleAns?.question.endLabel}
                                         </g:if>
-                                        <br>${it}
                                     </label>
                                 </g:each>
                             </fieldset>
