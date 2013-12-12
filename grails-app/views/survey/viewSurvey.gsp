@@ -141,12 +141,12 @@
                                     <input id="qn${currentQnCnt}RadioH${it}" name="qn${currentQnCnt}RadioH" data-theme="c" type="radio">
                                     <label for="qn${currentQnCnt}RadioH${it}">
                                         <g:if test="${it == 1}">
-                                            ${singleQn?.startLabel}
+                                            ${singleQn?.startLabel}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </g:if>
+                                        ${it}
                                         <g:if test="${it == singleQn?.scale}">
-                                            ${singleQn?.endLabel}
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${singleQn?.endLabel}
                                         </g:if>
-                                        <br>${it}
                                     </label>
                                 </g:each>
                             </fieldset>
