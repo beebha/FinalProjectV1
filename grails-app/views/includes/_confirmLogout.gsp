@@ -1,4 +1,4 @@
-<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" class="ui-corner-all">
+<div data-role="popup" id="popupDialog" data-position-to="window" data-overlay-theme="a" data-theme="c" class="ui-corner-all">
     <div data-role="header" data-theme="a" class="ui-corner-top">
         <h1>Confirm Logout</h1>
     </div>

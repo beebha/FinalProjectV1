@@ -6,11 +6,7 @@
 <body>
 <g:javascript src="application.js"/>
 <div data-role="page" id="homePage" data-add-back-btn="false">
-    <div data-theme="a" data-role="header">
-        <h3>
-            CSCI-56 Final Project - Surveys Galore
-        </h3>
-    </div>
+    <g:render template='../includes/headerBar'/>
     <div data-role="content">
         <h2>${title}</h2>
         <g:if test="${flash.message}">
@@ -135,9 +131,6 @@
                     <input type="button" value="Create Survey" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
                 </g:link>
             </g:if>
-            <g:link controller="logout" action="logout">
-                <input type="button" value="Logout" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true">
-            </g:link>
         </center>
         <br>
         <g:render template='../includes/footer'/>

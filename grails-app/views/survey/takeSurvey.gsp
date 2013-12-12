@@ -6,11 +6,7 @@
 <body>
 <g:javascript src="application.js"/>
 <div data-role="page" id="viewSurveyPage">
-    <div data-theme="a" data-role="header">
-        <h3>
-            CSCI-56 Final Project - Surveys Galore
-        </h3>
-    </div>
+    <g:render template='../includes/headerBarWithLogoutConfirmation'/>
     <div data-role="content">
         <h2>Take Survey</h2>
         <g:if test="${flash.message}">
@@ -140,8 +136,6 @@
         <br><center><h3>END OF SURVEY</h3></center><br>
         <center>
             <input type="submit" value="Submit Survey Results" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
-            <g:render template='../includes/confirmLogout'/>
-            <a id="logoutBtn" href="#popupDialog" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Logout</a>
         </center>
         </g:form>
         <g:render template='../includes/footer'/>

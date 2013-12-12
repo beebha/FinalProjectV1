@@ -6,11 +6,7 @@
 <body>
 <g:javascript src="application.js"/>
 <div data-role="page" id="editQuestionPage">
-    <div data-theme="a" data-role="header">
-        <h3>
-            CSCI-56 Final Project - Surveys Galore
-        </h3>
-    </div>
+    <g:render template='../includes/headerBarWithLogoutConfirmation'/>
     <div data-role="content">
         <h2>Edit Question</h2>
         <g:form controller="question" action="saveQn">
@@ -125,8 +121,6 @@
                     <input type="button" value="Cancel & Return to Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
                 </g:link>
                 <input type="submit" value="Save & Return to Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
-                <g:render template='../includes/confirmLogout'/>
-                <a id="logoutBtn" href="#popupDialog" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Logout</a>
             </center>
         </g:form>
         <br>

@@ -6,11 +6,7 @@
 <body>
 <g:javascript src="application.js"/>
 <div data-role="page" id="showSurveyResultPage">
-    <div data-theme="a" data-role="header">
-        <h3>
-            CSCI-56 Final Project - Surveys Galore
-        </h3>
-    </div>
+    <g:render template='../includes/headerBar'/>
     <div data-role="content">
         <h2>Survey Results</h2>
         <h3>Taken by <em>${surveyResultInstance?.surveyTaker.username}</em> (<g:formatDate date="${surveyResultInstance?.dateCreated}" formatName="default.date.format"/>)</h3>
@@ -138,10 +134,6 @@
             <g:set var="currentQnCnt" value="${currentQnCnt + 1}"/>
         </g:each>
         <br><center><h3>END OF SURVEY RESULTS</h3></center><br>
-        <center>
-            <g:render template='../includes/confirmLogout'/>
-            <a id="logoutBtn" href="#popupDialog" data-rel="popup" data-role="button" data-icon="gear" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Logout</a>
-        </center>
         <g:render template='../includes/footer'/>
     </div>
 </div>
