@@ -17,6 +17,6 @@ class SurveyResult {
     }
 
     static mapping = {
-        answers sort: 'question.id', order: 'asc'
+        answers sort: 'id', order: 'asc'
     }
 }

@@ -60,17 +60,7 @@ class SurveyResultController {
 
     def showSurveyResults(Long surveyResultID)
     {
-        println "showSurveyResults"
-
         def surveyResultInstance = SurveyResult.get(surveyResultID)
-
-        println "Survey Result ID : " + surveyResultInstance.id
-
-        println "Survey Result Category : " + surveyResultInstance.category
-
-        println "Survey Name : " + surveyResultInstance.survey.name
-
-        println "No. of answers : " + surveyResultInstance.answers.size()
 
         render(view: "showSurveyResult", model: [surveyResultInstance: surveyResultInstance])
     }

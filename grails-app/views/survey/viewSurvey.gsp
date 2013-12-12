@@ -26,8 +26,8 @@
         </div>
         <g:if test="${surveyState == 'active'}">
             <div data-role="fieldcontain">
-                <label for="surveyname">
-                    Name
+                <label for="category">
+                    Category
                 </label>
                 <input name="category" id="category" value="${surveyInstance?.category}" type="text" data-mini="true" readonly>
             </div>
@@ -46,7 +46,7 @@
         </g:else>
 
         <g:set var="currentQnCnt" value="${1}"/>
-        <g:each in='${surveyInstance?.questions}' var='singleQn'>
+        <g:each in='${surveyInstance?.questions.sort{a,b-> a.id.compareTo(b.id)}}' var='singleQn'>
             <div id="question${currentQnCnt}">
                 <h3>Question ${currentQnCnt}</h3>
                 <div data-role="fieldcontain">

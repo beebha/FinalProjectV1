@@ -15,7 +15,7 @@
         <h2>Survey Results</h2>
         <h3>Taken by <em>${surveyResultInstance?.surveyTaker.username}</em> (<g:formatDate date="${surveyResultInstance?.dateCreated}" formatName="default.date.format"/>)</h3>
         <g:set var="currentQnCnt" value="${1}"/>
-        <g:each in='${surveyResultInstance?.answers}' var='singleAns'>
+        <g:each in='${surveyResultInstance?.answers.sort{a,b-> a.question.id.compareTo(b.question.id)}}' var='singleAns'>
             <div id="question${currentQnCnt}">
                 <h3>Question ${currentQnCnt}</h3>
                 <h4>${singleAns?.question.questionText}</h4>

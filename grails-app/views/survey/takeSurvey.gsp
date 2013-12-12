@@ -20,7 +20,7 @@
         <g:hiddenField name="surveyID" value="${surveyInstance?.id}"/>
         <h3>${surveyInstance?.name} - (${surveyInstance?.category})</h3>
         <g:set var="currentQnCnt" value="${1}"/>
-        <g:each in='${surveyInstance?.questions}' var='singleQn'>
+        <g:each in='${surveyInstance?.questions.sort{a,b-> a.id.compareTo(b.id)}}' var='singleQn'>
             <div id="question${currentQnCnt}">
                 <h3>Question ${currentQnCnt}</h3>
                 <h4>${singleQn?.questionText}</h4>
