@@ -187,6 +187,9 @@
                 <input type="submit" name="savecontinue" value="Save & Continue Later" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
                 <input type="submit" name="savecomplete" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
             </g:if>
+            <g:link controller="home">
+                <input type="button" value="Cancel" data-icon="back" data-iconpos="right" data-mini="true" data-inline="true">
+            </g:link>
         </center>
         </g:form>
         <g:render template='../includes/footer'/>

@@ -36,6 +36,9 @@
             </div>
             <center>
                 <input type="submit" value="Save & Continue" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
+                <g:link controller="home">
+                    <input type="button" value="Cancel" data-icon="back" data-iconpos="right" data-mini="true" data-inline="true">
+                </g:link>
             </center>
         </g:form>
         <br>
