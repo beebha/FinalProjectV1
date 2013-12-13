@@ -176,16 +176,20 @@
         <br><center><h3>END OF SURVEY</h3></center><br>
         <center>
             <g:if test="${surveyState == 'active'}">
-                <input type="submit" name="deactivate" value="Deactivate Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" name="deactivate" value="Deactivate" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
             </g:if>
             <g:if test="${surveyState == 'complete'}">
                 <input type="submit" name="saveadd" value="Save & Add Question" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
-                <input type="submit" name="savepublish" value="Save & Publish Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" name="savepublish" value="Save & Publish" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <g:render template='../includes/confirmDelete'/>
+                <a id="deleteBtn" href="#popupDeleteDialog" data-rel="popup" data-role="button" data-icon="delete" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Delete</a>
             </g:if>
             <g:if test="${surveyState == 'incomplete'}">
                 <input type="submit" name="saveadd" value="Save & Add Question" data-icon="plus" data-iconpos="right" data-mini="true" data-inline="true">
                 <input type="submit" name="savecontinue" value="Save & Continue Later" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">
-                <input type="submit" name="savecomplete" value="Save & Complete Survey" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <input type="submit" name="savecomplete" value="Save & Complete" data-icon="check" data-iconpos="right" data-mini="true" data-inline="true">
+                <g:render template='../includes/confirmDelete'/>
+                <a id="deleteBtn" href="#popupDeleteDialog" data-rel="popup" data-role="button" data-icon="delete" data-iconpos="right" data-mini="true" data-inline="true" data-transition="pop">Delete</a>
             </g:if>
             <g:link controller="home">
                 <input type="button" value="Cancel" data-icon="back" data-iconpos="right" data-mini="true" data-inline="true">

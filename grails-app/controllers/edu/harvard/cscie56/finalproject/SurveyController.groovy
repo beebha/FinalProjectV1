@@ -100,7 +100,7 @@ class SurveyController {
 
     def showHome()
     {
-        redirect(controller: "home", view: "home")
+        redirect(controller: "home")
     }
 
     def viewSurvey(String surveyState, Long surveyID)
@@ -160,30 +160,16 @@ class SurveyController {
         }
     }
 
-    def delete(Long id) {
-        def surveyInstance = Survey.get(id)
-        if (!surveyInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'survey.label', default: 'Survey'), id])
-            redirect(action: "list")
-            return
-        }
-
-        if(SurveyResult.findAllBySurvey(surveyInstance).size() > 0) {
-            surveyInstance.errors.rejectValue("version", "default.not.deleted.surveyresults.message",
-                    [message(code: 'survey.label', default: 'Survey')] as Object[],
-                    "This Survey has results and cannot be deleted.")
-            render(view: "edit", model: [surveyInstance: surveyInstance])
-            return
-        }
+    def deleteSurvey(Long surveyID)
+    {
+        def surveyInstance = Survey.get(surveyID)
 
         try {
             surveyService.deleteSurvey(surveyInstance)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'survey.label', default: 'Survey'), id])
-            redirect(action: "list")
+            showHome()
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'survey.label', default: 'Survey'), id])
-            redirect(action: "show", id: id)
+            showHome()
         }
     }
 }
