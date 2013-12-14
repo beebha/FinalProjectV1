@@ -17,9 +17,14 @@ class SurveyResultController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    /**
+     * This method saves a survey results
+     */
 
     def saveSurveyResults()
     {
+
+        // gets the instance of the logged in user
         User surveyTaker = User.load(springSecurityService.principal.id)
         def surveyID = Long.valueOf(params.surveyID.toString())
 
@@ -27,6 +32,7 @@ class SurveyResultController {
 
         def allParams = params.entrySet()
 
+        // saves the results for each question in the survey
         allParams.each {
 
             def key = it.key.toString()
@@ -53,7 +59,7 @@ class SurveyResultController {
                     additionalComments = params.get("additionalCommentsQn"+qnID)
                 }
 
-                // save Answer
+                // save each answer
                 answerService.saveAnswer(answers, additionalComments, qnInstance, surveyResultInstance)
             }
         }
@@ -61,6 +67,12 @@ class SurveyResultController {
         // send to all surveys page with thank you message
         redirect(controller: "home", action: "allsurveyindex", params: [message: "Thank you for taking the Survey!"])
     }
+
+    /**
+     * This method shows the survey results
+     *
+     * @param surveyResultID - ID of survey results
+     */
 
     def showSurveyResults(Long surveyResultID)
     {
