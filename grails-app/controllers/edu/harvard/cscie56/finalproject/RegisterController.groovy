@@ -15,16 +15,27 @@ class RegisterController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    /**
+     * This method clears any flash messages and
+     * redirects to the register view
+     */
+
     def index()
     {
         flash.clear()
         render(view: "register")
     }
 
+    /**
+     * This method creates a user, logs them in and redirects to the home view of the application
+     */
+
     def save()
     {
+        // define the role
         def userRole = Role.findOrSaveByAuthority("ROLE_USER")
 
+        // define the user instance
         def userInstance = new User(
                 username: params.username,
                 password: params.password,
@@ -36,6 +47,7 @@ class RegisterController {
             return
         }
 
+        // save the user
         userInstance.save(flush: true)
 
         if (userInstance.hasErrors()) {
@@ -45,8 +57,10 @@ class RegisterController {
 
         UserRole.create userInstance, userRole
 
+        // authenticate the user
         springSecurityService.reauthenticate(params.username)
 
+        // redirect to the home view
         redirect(controller: "home")
     }
 }
