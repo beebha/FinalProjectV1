@@ -16,8 +16,18 @@ class QuestionController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    /**
+     * This method deletes a question
+     *
+     * @param surveyID - ID of survey
+     * @param questionID - ID of question
+     * @param surveyState - current state of survey
+     * @return
+     */
+
     def deleteQn(Long surveyID, Long questionID, String surveyState)
     {
+        // checks to see survey has at least 1 question
         def surveyInstance = Survey.get(surveyID)
         if(surveyInstance.questions.size() == 1) {
             flash.message = "Question was not deleted. Survey must have at least one question."
@@ -25,8 +35,10 @@ class QuestionController {
             return
         }
 
+        // get the question instance
         def questionInstance = Question.get(questionID)
 
+        // delete the question and redirect to the view survey page
         try {
             questionService.deleteQuestion(questionInstance)
             flash.message = "Question was successfully deleted"
@@ -38,6 +50,14 @@ class QuestionController {
         }
     }
 
+    /**
+     * This method redirects to the edit view of a question
+     *
+     * @param surveyID - ID of survey
+     * @param questionID - ID of question
+     * @param surveyState - current state of survey
+     * @return
+     */
     def editQn(Long surveyID, Long questionID, String surveyState)
     {
         def qnTypes = SurveyUtils.getAllQuestionTypes()
@@ -51,6 +71,9 @@ class QuestionController {
         ])
     }
 
+    /**
+     * This method updates a question
+     */
     def saveQn()
     {
         def surveyID = Long.valueOf(params.surveyID.toString())
@@ -88,6 +111,7 @@ class QuestionController {
         def questionInstance = Question.get(questionID)
         questionService.updateQuestion(questionInstance, qnText, qnType, scale, startLabel, endLabel, options, additionalComments)
 
+        // redirect to view survey page
         redirect(controller: 'survey', action: 'viewSurvey', params: [surveyID: surveyID, surveyState:surveyState])
     }
 }
