@@ -2,6 +2,10 @@ package edu.harvard.cscie56.finalproject
 
 import edu.harvard.cscie56.finalproject.auth.User
 
+/**
+ * Domain object for SurveyResult
+ */
+
 class SurveyResult {
 
     User surveyTaker

@@ -1,5 +1,9 @@
 package edu.harvard.cscie56.finalproject
 
+/**
+ * Domain object for Answer
+ */
+
 class Answer {
     Question question
     List allAnswers

@@ -1,5 +1,9 @@
 package edu.harvard.cscie56.finalproject
 
+/**
+ * Domain object for Question
+ */
+
 class Question {
 
     String questionText
