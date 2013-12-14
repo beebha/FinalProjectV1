@@ -19,11 +19,20 @@ class SurveyController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    /**
+     * This method clears any flash messages and
+     * redirects to step 1 in creating a survey
+     */
+
     def createSurvey()
     {
         flash.clear()
         render(view: "surveyStep1", model: [surveyInstance: new Survey(), categories: SurveyUtils.getAllSurveyCategories()])
     }
+
+    /**
+     * This method saves the initial survey and redirects to step 2
+     */
 
     def saveSurveyStep1()
     {
@@ -36,6 +45,10 @@ class SurveyController {
         }
         showSurveyStep2(surveyInstance.id)
     }
+
+    /**
+     * This method saves a question which is part of step 2 in a creation of a survey
+     */
 
     def saveSurveyStep2()
     {
@@ -86,12 +99,24 @@ class SurveyController {
         }
     }
 
+    /**
+     * This method gets all question types available for a survey and redirects to step 2 of the survey
+     *
+     * @param surveyID - ID of survey
+     */
+
     def showSurveyStep2(Long surveyID)
     {
         def qnTypes = SurveyUtils.getAllQuestionTypes()
 
         render(view: "surveyStep2", model: [surveyID: surveyID, qnTypes: qnTypes, qnTypesJSON: qnTypes as JSON])
     }
+
+    /**
+     * This method saves the survey and redirects to the home view
+     *
+     * @param surveyID - ID of survey
+     */
 
     def saveSurveyShowHome(Long surveyID)
     {
@@ -103,26 +128,50 @@ class SurveyController {
         showHome()
     }
 
+    /**
+     * This method shows the home view
+     */
+
     def showHome()
     {
         redirect(controller: "home")
     }
+
+    /**
+     * This method shows the view survey page
+     *
+     * @param surveyState - current state of survey
+     * @param surveyID - ID of survey
+     */
 
     def viewSurvey(String surveyState, Long surveyID)
     {
         render(view: "viewSurvey", model: [surveyInstance: Survey.get(surveyID), surveyState: surveyState, categories: SurveyUtils.getAllSurveyCategories()])
     }
 
+    /**
+     * This method shows the take survey page
+     *
+     * @param surveyID - ID of survey
+     */
+
     def takeSurvey(Long surveyID)
     {
         render(view: "takeSurvey", model: [surveyInstance: Survey.get(surveyID)])
     }
+
+    /**
+     * This method updates the survey and redirects based on selected button
+     *
+     * @param surveyID - ID of survey
+     */
 
     def updateSurvey(Long surveyID)
     {
         def surveyInstance = Survey.get(surveyID)
 
         if(params.deactivate != null) {
+
             // check to see if survey has results
             if(SurveyResult.findAllBySurvey(surveyInstance).size() > 0) {
                 flash.message = "Survey has results and cannot be deactivated"
@@ -137,6 +186,7 @@ class SurveyController {
             }
         }
 
+        // save survey state and redirect based on button clicked
         if (params.saveadd != null ||
                 params.savepublish != null ||
                 params.savecontinue != null ||
@@ -164,6 +214,10 @@ class SurveyController {
             }
         }
     }
+
+    /**
+     * This method deletes a survey and redirects to the home view
+     */
 
     def deleteSurvey(Long surveyID)
     {
