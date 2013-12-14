@@ -1,5 +1,10 @@
 package edu.harvard.cscie56.finalproject
 
+/**
+ * <code>LogoutController</code>
+ * Controller class for Logout feature
+ */
+
 class LogoutController {
 
     def logout()

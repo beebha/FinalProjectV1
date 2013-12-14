@@ -3,6 +3,11 @@ package edu.harvard.cscie56.finalproject
 import edu.harvard.cscie56.finalproject.auth.User
 import grails.plugin.springsecurity.annotation.Secured
 
+/**
+ * <code>HomeController</code>
+ * Controller class for home page of application
+ */
+
 @Secured('isAuthenticated()')
 class HomeController {
 

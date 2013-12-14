@@ -4,6 +4,11 @@ import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
+/**
+ * <code>QuestionController</code>
+ * Controller class for Question domain object
+ */
+
 @Secured('isAuthenticated()')
 class QuestionController {
 

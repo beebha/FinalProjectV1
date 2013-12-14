@@ -4,6 +4,11 @@ import edu.harvard.cscie56.finalproject.auth.Role
 import edu.harvard.cscie56.finalproject.auth.User
 import edu.harvard.cscie56.finalproject.auth.UserRole
 
+/**
+ * <code>RegisterController</code>
+ * Controller class for Register User feature
+ */
+
 class RegisterController {
 
     def springSecurityService

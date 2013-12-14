@@ -2,6 +2,11 @@ package edu.harvard.cscie56.finalproject
 
 import edu.harvard.cscie56.finalproject.auth.User
 
+/**
+ * <code>ForgotController</code>
+ * Controller class for Forgot Password feature
+ */
+
 class ForgotController {
 
     def springSecurityService

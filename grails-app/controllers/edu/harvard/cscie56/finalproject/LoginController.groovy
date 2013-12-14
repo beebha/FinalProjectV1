@@ -1,5 +1,10 @@
 package edu.harvard.cscie56.finalproject
 
+/**
+ * <code>LoginController</code>
+ * Controller class for Login feature
+ */
+
 class LoginController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

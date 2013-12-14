@@ -5,6 +5,11 @@ import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import org.springframework.dao.DataIntegrityViolationException
 
+/**
+ * <code>SurveyController</code>
+ * Controller class for all actions associated with Survey creation/update/deletion
+ */
+
 @Secured('isAuthenticated()')
 class SurveyController {
 
