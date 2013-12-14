@@ -1,6 +1,24 @@
 package edu.harvard.cscie56.finalproject
 
+/**
+ * Service class for Question
+ */
+
 class QuestionService {
+
+    /**
+     * This method saves a question
+     *
+     * @param questionText
+     * @param type
+     * @param scale
+     * @param startLabel
+     * @param endLabel
+     * @param options
+     * @param overallComment
+     * @param surveyId
+     * @return
+     */
 
     Question saveQuestion(String questionText, String type, Integer scale,
                           String startLabel, String endLabel, List<String> options,
@@ -22,6 +40,20 @@ class QuestionService {
         return questionInstance
     }
 
+    /**
+     * This method updates a question
+     *
+     * @param questionInstance
+     * @param questionText
+     * @param type
+     * @param scale
+     * @param startLabel
+     * @param endLabel
+     * @param options
+     * @param overallComment
+     * @return
+     */
+
     def updateQuestion(Question questionInstance, String questionText, String type, Integer scale,
                        String startLabel, String endLabel, List<String> options,
                        Boolean overallComment)
@@ -36,6 +68,11 @@ class QuestionService {
         questionInstance.save(flush: true)
     }
 
+    /**
+     * This method deletes a question
+     *
+     * @param questionInstance
+     */
     def deleteQuestion(Question questionInstance)
     {
         questionInstance.delete(flush: true)
