@@ -7,6 +7,10 @@ package edu.harvard.cscie56.finalproject
 
 class LogoutController {
 
+    /**
+     * This method forwards the request to the spring security logout
+     */
+
     def logout()
     {
         flash.clear()
