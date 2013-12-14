@@ -2,7 +2,17 @@ package edu.harvard.cscie56.finalproject
 
 import edu.harvard.cscie56.finalproject.auth.User
 
+/**
+ * Utils class for Survey application
+ */
+
 class SurveyUtils {
+
+    /**
+     * This method gets all published surveys of logged in user
+     *
+     * @param user - logged in user
+     */
 
     public static getMyActiveSurveyCategoriesAndCount(User user)
     {
@@ -21,6 +31,12 @@ class SurveyUtils {
         return surveys
     }
 
+    /**
+     * This method gets all completed surveys of logged in user
+     *
+     * @param user - logged in user
+     */
+
     public static getMyCompletedSurveyCategoriesAndCount(User user)
     {
         def surveys = []
@@ -36,6 +52,12 @@ class SurveyUtils {
         }
         return surveys
     }
+
+    /**
+     * This method gets all incomplete surveys of logged in user
+     *
+     * @param user - logged in user
+     */
 
     public static getMyIncompleteSurveyCategoriesAndCount(User user)
     {
@@ -54,6 +76,12 @@ class SurveyUtils {
         return surveys
     }
 
+    /**
+     * This method gets all published surveys of all surveys
+     *
+     * @param user - logged in user
+     */
+
     public static getAllSurveyCategoriesAndCount()
     {
         def surveys = []
@@ -70,6 +98,12 @@ class SurveyUtils {
         }
         return surveys
     }
+
+    /**
+     * This method gets all survey results of the published surveys of logged in user
+     *
+     * @param user - logged in user
+     */
 
     public static getAllSurveyResultsCategoriesAndCountByCreator(User user)
     {
@@ -88,10 +122,18 @@ class SurveyUtils {
         return allSurveyResults
     }
 
+    /**
+     * This method gets all survey categories
+     */
+
     public static getAllSurveyCategories()
     {
         Survey.constraints.category.inList
     }
+
+    /**
+     * This method gets all question types
+     */
 
     public static getAllQuestionTypes()
     {
