@@ -77,9 +77,7 @@ class SurveyUtils {
     }
 
     /**
-     * This method gets all published surveys of all surveys
-     *
-     * @param user - logged in user
+     * This method gets all published surveys of all users
      */
 
     public static getAllSurveyCategoriesAndCount()

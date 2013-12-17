@@ -1,10 +1,6 @@
 package edu.harvard.cscie56.finalproject
 
-import static org.junit.Assert.*
-
-import grails.test.mixin.*
-import grails.test.mixin.support.*
-import org.junit.*
+import grails.test.mixin.TestFor
 
 @TestFor(LoginController)
 class LoginControllerTests

@@ -4,11 +4,8 @@ import edu.harvard.cscie56.finalproject.auth.User
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
-import grails.test.mixin.TestMixin
-import grails.test.mixin.domain.DomainClassUnitTestMixin
 
 @TestFor(ForgotController)
-@TestMixin(DomainClassUnitTestMixin)
 @Mock([User, SpringSecurityService])
 class ForgotControllerTests
 {
@@ -57,7 +54,6 @@ class ForgotControllerTests
         User user = new User(username: 'test@test.com', password: 'oldpassword')
         user.springSecurityService = [encodePassword: { String p -> "encrypted" }]
         user.save()
-        mockDomain(User, [user])
 
         controller.reset()
         assert user.password == "newpassword"
