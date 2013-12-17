@@ -10,8 +10,8 @@ import grails.test.mixin.domain.DomainClassUnitTestMixin
 @TestFor(ForgotController)
 @TestMixin(DomainClassUnitTestMixin)
 @Mock([User, SpringSecurityService])
-class ForgotControllerTests {
-
+class ForgotControllerTests
+{
     void testIndex()
     {
         controller.index()
