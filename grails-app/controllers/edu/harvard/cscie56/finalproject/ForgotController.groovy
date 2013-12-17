@@ -48,13 +48,7 @@ class ForgotController {
 
         // save the new password
         userInstance.properties = params
-
-        userInstance.save(flush: true)
-
-        if (userInstance.hasErrors()) {
-            render(view: "forgot", model: [forgotInstance: userInstance])
-            return
-        }
+        userInstance.save()
 
         // re-authenticate the user
         if (springSecurityService.loggedIn &&
