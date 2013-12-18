@@ -29,27 +29,27 @@ class SurveyResultSpec extends Specification
     void "Test category inList constraints"()
     {
         when: 'the category is not in list'
-        def surveyresult = new SurveyResult(
+        def surveyResult = new SurveyResult(
                 surveyTaker: user2,
                 surveyCreator: user1,
                 category: "wassup",
                 survey: survey)
 
         then: 'validation should fail'
-        !surveyresult.validate()
-        surveyresult.hasErrors()
-        surveyresult.errors.errorCount == 1
+        !surveyResult.validate()
+        surveyResult.hasErrors()
+        surveyResult.errors.errorCount == 1
 
         when: 'the category is in list'
-        surveyresult = new SurveyResult(
+        surveyResult = new SurveyResult(
                 surveyTaker: user2,
                 surveyCreator: user1,
                 category: "Education",
                 survey: survey)
 
         then: 'validation should pass'
-        surveyresult.validate()
-        !surveyresult.hasErrors()
-        surveyresult.errors.errorCount == 0
+        surveyResult.validate()
+        !surveyResult.hasErrors()
+        surveyResult.errors.errorCount == 0
     }
 }
