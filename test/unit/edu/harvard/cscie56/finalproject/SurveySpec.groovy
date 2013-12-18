@@ -13,7 +13,7 @@ class SurveySpec extends Specification {
     private User user
 
     void setup() {
-        user = new User(username: 'test@test.com', password: 'oldpassword')
+        user = new User(username: 'test@test.com', password: 'password')
         user.springSecurityService = [encodePassword: { String p -> "encrypted" }]
         user.save()
     }

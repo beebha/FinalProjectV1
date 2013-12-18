@@ -15,11 +15,11 @@ class SurveyUtilsTests
 
     void setUp()
     {
-        user1 = new User(username: 'test@test.com', password: 'oldpassword')
+        user1 = new User(username: 'test1@test1.com', password: 'password')
         user1.springSecurityService = [encodePassword: { String p -> "encrypted" }]
         user1.save()
 
-        user2 = new User(username: 'test@test.com', password: 'oldpassword')
+        user2 = new User(username: 'test2@test2.com', password: 'password')
         user2.springSecurityService = [encodePassword: { String p -> "encrypted" }]
         user2.save()
 
