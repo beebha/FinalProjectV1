@@ -48,7 +48,7 @@ class RegisterController {
         }
 
         // save the user
-        userInstance.save(flush: true)
+        userInstance.save()
 
         if (userInstance.hasErrors()) {
             render(view: "register", model: [registerInstance: userInstance])
@@ -58,7 +58,9 @@ class RegisterController {
         UserRole.create userInstance, userRole
 
         // authenticate the user
-        springSecurityService.reauthenticate(params.username)
+        if(springSecurityService != null) {
+            springSecurityService.reauthenticate(params.username)
+        }
 
         // redirect to the home view
         redirect(controller: "home")

@@ -50,6 +50,11 @@ class ForgotController {
         userInstance.properties = params
         userInstance.save()
 
+        if (userInstance.hasErrors()) {
+            render(view: "forgot", model: [forgotInstance: userInstance])
+            return
+        }
+
         // re-authenticate the user
         if (springSecurityService.loggedIn &&
                 springSecurityService.principal.username == userInstance.username) {
