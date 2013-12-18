@@ -1,9 +1,8 @@
 package edu.harvard.cscie56.finalproject
 
+import edu.harvard.cscie56.finalproject.auth.Role
 import edu.harvard.cscie56.finalproject.auth.User
 import edu.harvard.cscie56.finalproject.auth.UserRole
-import edu.harvard.cscie56.finalproject.auth.Role
-import grails.plugin.springsecurity.SpringSecurityService
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 
