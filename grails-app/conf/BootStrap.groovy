@@ -7,6 +7,7 @@ import edu.harvard.cscie56.finalproject.auth.UserRole
 class BootStrap {
 
     def init = { servletContext ->
+
         def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
 
         def testUser = new User(username: 'user@user.com', password: 'password')
