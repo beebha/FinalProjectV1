@@ -24,7 +24,7 @@ class Question {
     static constraints = {
         startLabel nullable: true
         endLabel nullable: true
-        options nullable:true
+        options nullable: true
         questionText blank: false
         type blank: false, inList: [
                 "Comment",
