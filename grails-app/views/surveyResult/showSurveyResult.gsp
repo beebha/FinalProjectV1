@@ -134,6 +134,26 @@
             <g:set var="currentQnCnt" value="${currentQnCnt + 1}"/>
         </g:each>
         <br><center><h3>END OF SURVEY RESULTS</h3></center><br>
+        <div id="exportSection">
+            <export:resource/>
+            <div class="export">
+                <span class="menuButton">
+                    <a class="csv ui-link" href="../surveyResult/exportView?format=csv&extension=csv" target="_blank">CSV</a>
+                </span>
+                <span class="menuButton">
+                    <a class="excel ui-link" href="../surveyResult/exportView?format=excel&extension=xls" target="_blank">EXCEL</a>
+                </span>
+                <span class="menuButton">
+                    <a class="pdf ui-link" href="../surveyResult/exportView?format=pdf&extension=pdf" target="_blank">PDF</a>
+                </span>
+                <span class="menuButton">
+                    <a class="rtf ui-link" href="../surveyResult/exportView?format=rtf&extension=rtf" target="_blank">RTF</a>
+                </span>
+                <span class="menuButton">
+                    <a class="xml ui-link" href="../surveyResult/exportView?format=xml&extension=xml" target="_blank">XML</a>
+                </span>
+            </div>
+        </div>
         <g:render template='../includes/footer'/>
     </div>
 </div>
