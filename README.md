@@ -55,7 +55,9 @@ Features
     - Results Tab in footer (Lists all published surveys results, i.e. published surveys of logged in user)
     - Export of Results (Allows export to CSV, XLS, PDF, RTF or XML)
 
-Instructions on running this app:
+
+Instructions on running
+------------------------
 
 
 
