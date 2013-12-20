@@ -27,7 +27,13 @@ The surveys fall within the following categories:
 The All Surveys tab has a list of all published surveys of all users that a logged in user can take.
 
 The Results tab has the results of surveys, which were created and published by the logged in user, taken by all other users.
-Upon viewing each individual survey results, one can export the results to CSV, XLS, PDF, RTF or XML.
+Upon viewing each individual survey results, one can export the results in the following formats:
+
+    - CSV
+    - XLS
+    - PDF
+    - RTF
+    - XML
 
 A user can logout of the application at anytime by clicking the Logout button present in the header bar at the top right corner.
 Based on the current page, a user may be prompted about logging out without saving any changes.
