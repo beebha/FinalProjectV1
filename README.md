@@ -4,7 +4,8 @@ CSCI-56 Final Project - Surveys Galore
 About
 ------
 
-This application allows a user to create surveys and publish them for other users to take.
+This mobile web application, built with Groovy on Grails along with jQuery Mobile,
+allows a user to create surveys and publish them for other users to take.
 Upon a successful login, the landing page lists all completed, incomplete and published surveys created by the logged in user.
 This page is also accessed via the My Surveys tab in the footer.
 
@@ -56,8 +57,45 @@ Features
     - Export of Results (Allows export to CSV, XLS, PDF, RTF or XML)
 
 
-Instructions on running
-------------------------
+Project Structure
+------------------
+
+    - Project Root
+        - grails-app
+            - conf (All conf files required for the Survey application)
+            - controllers (All controller classes in the edu.harvard.cscie56.finalproject package)
+            - domain (All domain classes in the edu.harvard.cscie56.finalproject package)
+            - services (All service classes in the edu.harvard.cscie56.finalproject package)
+            - views (All GSPs for the Survey application)
+        - src
+            - groovy (Utility class in the edu.harvard.cscie56.finalproject package)
+            - templates
+                -war
+                    web.xml (Added entry for springSecurityFilterChain)
+        - test
+            - unit (All unit test classes in the edu.harvard.cscie56.finalproject package)
+        - web-app
+            - css
+                - custom (Contains custom css file for the application)
+                - jquery (Contains jQuery Mobile css files)
+            - js
+                - application.js (Custom file created for the application)
+                - jquery (Contains jQuery Mobile js files)
+
+
+Instructions
+-------------
+
+    - Download the zip file for this project from https://github.com/beebha/FinalProjectV1 (Download ZIP on RHS of page)
+    - Unzip the folder and via a terminal prompt navigate to the unzipped folder and cd into it.
+    - Run the following command "grails upgrade"
+    - Run the following command "grails compile"
+    - Run the following command to run the application "grails run-app".
+    - Open either the iOS simulator or Android simulator and access the following URL:
+        - http://localhost:8090/FinalProjectV1
+    - Run the following command for all unit tests with code coverage "grails test-app -coverage"
+        - Navigate to the target folder to view the test results and code coverage
+
 
 
 
