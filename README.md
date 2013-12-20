@@ -14,6 +14,7 @@ Published surveys are available to all users of the application.
 In addition, published surveys which do not have any survey results associated, can be deactivated to be edited.
 
 The surveys fall within the following categories:
+
     - Customer
     - Education
     - Entertainment
