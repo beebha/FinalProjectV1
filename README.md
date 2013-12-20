@@ -7,6 +7,7 @@ About
 This mobile web application, built with Groovy on Grails along with jQuery Mobile,
 allows a user to create surveys and publish them for other users to take.
 Upon a successful login, the landing page lists all completed, incomplete and published surveys created by the logged in user.
+Here, the user is also able to create a new survey.
 This page is also accessed via the My Surveys tab in the footer.
 
 Complete surveys can either have more questions added and saved or be published.
@@ -26,6 +27,7 @@ The surveys fall within the following categories:
     - Other
 
 The All Surveys tab has a list of all published surveys of all users that a logged in user can take.
+This is done by navigating to the survey from the list view to the chosen survey and then taking the survey.
 
 The Results tab has the results of surveys, which were created and published by the logged in user, taken by all other users.
 Upon viewing each individual survey results, one can export the results in the following formats:
@@ -88,14 +90,9 @@ Instructions
 
     - Download the zip file for this project from https://github.com/beebha/FinalProjectV1 (Download ZIP on RHS of page)
     - Unzip the folder and via a terminal prompt navigate to the unzipped folder and cd into it.
-    - Run the following command "grails upgrade"
     - Run the following command "grails compile"
     - Run the following command to run the application "grails run-app".
     - Open either the iOS simulator or Android simulator and access the following URL:
         - http://localhost:8090/FinalProjectV1
     - Run the following command for all unit tests with code coverage "grails test-app -coverage"
         - Navigate to the target folder to view the test results and code coverage
-
-
-
-
