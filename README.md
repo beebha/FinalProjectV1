@@ -34,8 +34,8 @@ Based on the current page, a user may be prompted about logging out without savi
 
 During the startup of the application, a sample user and sample surveys (complete, incomplete & published) are created for testing.
 
-Username: user@user.com,
-Password: password
+    - Username: user@user.com,
+    - Password: password
 
 
 Features
