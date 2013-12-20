@@ -5,12 +5,6 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 grails.server.port.http = 8090
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
-
-// uncomment (and adjust settings) to fork the JVM to isolate classpaths
-//grails.project.fork = [
-//   run: [maxMemory:1024, minMemory:64, debug:false, maxPerm:256]
-//]
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -32,12 +26,6 @@ grails.project.dependency.resolution = {
         mavenLocal()
         mavenCentral()
 
-        // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
-
         // Added repositories
         mavenRepo 'http://repo.spring.io/milestone'
         mavenRepo 'http://download.java.net/maven/2/'
@@ -45,8 +33,6 @@ grails.project.dependency.resolution = {
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-
-        // runtime 'mysql:mysql-connector-java:5.1.22'
         test "org.spockframework:spock-grails-support:0.7-groovy-2.0"
     }
 
@@ -54,11 +40,6 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
-
-        // Uncomment these (or add new ones) to enable additional resources capabilities
-        //runtime ":zipped-resources:1.0"
-        //runtime ":cached-resources:1.0"
-        //runtime ":yui-minify-resources:0.1.5"
 
         build ":tomcat:$grailsVersion"
 
@@ -69,8 +50,6 @@ grails.project.dependency.resolution = {
         // Added plugins
 
         compile ":spring-security-core:2.0-RC2"
-
-        compile ":mail:1.0.1"
 
         compile ":jquery-mobile:1.1.0.5"
 
