@@ -4,7 +4,7 @@ CSCI-56 Final Project - Surveys Galore
 About
 ------
 
-This mobile web application, built with Groovy on Grails along with jQuery Mobile,
+This mobile web application, built with Grails along with jQuery Mobile,
 allows a user to create surveys and publish them for other users to take.
 Upon a successful login, the landing page lists all completed, incomplete and published surveys created by the logged in user.
 Here, the user is also able to create a new survey.
